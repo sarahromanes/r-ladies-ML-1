@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Machine Learning 101</title>
+    <meta charset="utf-8">
+    <meta name="author" content="  Sarah Romanes   <span>&lt;i class="fab  fa-twitter faa-float animated "&gt;&lt;/i&gt;&amp;nbsp;@sarahromanes</span>" />
+    <link href="libs/remark-css/kunoichi.css" rel="stylesheet" />
+    <link href="libs/remark-css/ninjutsu.css" rel="stylesheet" />
+    <link href="libs/font-awesome-animation/font-awesome-animation-emi.css" rel="stylesheet" />
+    <script src="libs/fontawesome/js/fontawesome-all.min.js"></script>
+    <link href="libs/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets\custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Machine Learning 101
+## Supervised Learning in R
+### <br><br>Sarah Romanes   <span>&lt;i class="fab  fa-twitter faa-float animated "&gt;&lt;/i&gt;&amp;nbsp;@sarahromanes</span>
+### <br>2018/10/10<br><br><span>&lt;i class="fas  fa-link faa-vertical animated " style=" color:white;"&gt;&lt;/i&gt;&amp;nbsp;bit.ly/rladies-sydney-ML-1</span>
+
+---
+
+
+
+
+
+layout: false
+class: bg-main3 split-30 hide-slide-number
+
+.column[
+
+]
+.column.slide-in-right[.content.vmiddle[
+.sliderbox.shade_main.pad1[
+.font5[Welcome]
+]
+]]
+
+---
+
+
+# .purple[The basics]
+
+
+---
+
+class: middle center bg-main1
+
+&lt;img src="images/mlmeme.png", width="70%"&gt;
+
+
+---
+
+# .purple[What *is* Machine Learning?]
+
+&lt;br&gt;
+
+### Machine learning is concerned with finding functions that best **predict** outputs (responses), given data inputs (predictors).
+
+&lt;br&gt;
+
+&lt;center&gt;
+
+  &lt;img src="images/ml-process.png", width="60%"&gt;
+
+&lt;/center&gt;
+
+&lt;br&gt;
+
+### Mathematically, Machine Learning problems are simply *optimisation* problems, in which we will use <i class="fab  fa-r-project "></i> to help us solve!
+
+---
+
+# .purple[Why do Machine Learning in <i class="fab  fa-r-project "></i>?]
+
+&lt;br&gt;
+
+&lt;center&gt;
+
+  &lt;img src="images/python-r-other-2016-2017.jpg", width="70%"&gt;
+
+&lt;/center&gt;
+
+---
+
+# .purple[Supervised vs Unsupervised Learning]
+
+---
+
+layout: false
+class: bg-main3 split-30 hide-slide-number
+
+.column[
+
+]
+.column.slide-in-right[.content.vmiddle[
+.sliderbox.shade_main.pad1[
+.font5[Regression]
+]
+]]
+
+---
+
+# More Elaboration
+
+---
+
+# Regression meme goes here
+
+---
+
+# Shiny app
+
+---
+
+class: split-two white
+
+.column.bg-main1[.content[
+# We can fit a linear model in R using the `lm` function as follows:
+
+&lt;br&gt;
+
+
+
+
+
+```r
+*fit &lt;-  lm(data=data,
+            Income ~ Education)
+```
+]]
+.column.bg-main2[.content.vmiddle.center[
+# This tells the `lm` function what data we are referring to
+]]
+
+---
+
+class: split-two white
+
+.column.bg-main1[.content[
+# We can fit a linear model in R using the `lm` function as follows:
+
+&lt;br&gt;
+
+
+```r
+fit &lt;-  lm(data=data, 
+*           Income ~ Education)
+```
+]]
+.column.bg-main2[.content.vmiddle.center[
+# This tells the `glm` function what variables we would like to regress. R expects the relationship in the form of `response~predictors`. 
+]]
+
+---
+
+class: split-two white
+
+.column.bg-main1[.content[
+# We can fit a linear model in R using the `lm` function as follows:
+
+
+
+```r
+fit &lt;-  lm(data=data, 
+            Income ~ Education)
+*summary(fit)
+```
+
+```
+## 
+## Call:
+## lm(formula = Income ~ Education, data = data)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -13.046  -2.293   0.472   3.288  10.110 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -39.4463     4.7248  -8.349  4.4e-09 ***
+## Education     5.5995     0.2882  19.431  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 5.653 on 28 degrees of freedom
+## Multiple R-squared:  0.931,	Adjusted R-squared:  0.9285 
+## F-statistic: 377.6 on 1 and 28 DF,  p-value: &lt; 2.2e-16
+```
+
+
+
+]]
+.column.bg-main2[.content.vmiddle.center[
+
+# Using the `summary` function, we ....
+]]
+
+---
+
+---
+
+# Binary outcomes - a case for Logistic Regression
+
+---
+
+# Shiny app
+
+---
+
+# 2 split, glm and predict
+
+---
+
+class: split-two white
+
+.column.bg-main1[.content[
+# We can fit a glm in R using the `glm` function as follows:
+
+&lt;br&gt;
+
+
+
+
+
+```r
+*fit &lt;-  glm(data=data,
+            Spiders~GrainSize,
+            family=binomial(link="logit")) 
+```
+]]
+.column.bg-main2[.content.vmiddle.center[
+# This tells the `glm` function what data we are referring to
+]]
+
+---
+
+class: split-two white
+
+.column.bg-main1[.content[
+# We can fit a glm in R using the `glm` function as follows:
+
+&lt;br&gt;
+
+
+```r
+fit &lt;-  glm(data=data, 
+*           Spiders~GrainSize,
+            family=binomial(link="logit")) 
+```
+]]
+.column.bg-main2[.content.vmiddle.center[
+# This tells the `glm` function what variables we would like to regress. Just like the `lm` function, R expects the relationship in the form of `response~predictors`. 
+]]
+
+---
+
+class: split-two white
+
+.column.bg-main1[.content[
+# We can fit a glm in R using the `glm` function as follows:
+
+&lt;br&gt;
+
+
+```r
+fit &lt;-  glm(data=data, 
+            Spiders~GrainSize, 
+*           family=binomial(link="logit"))
+```
+]]
+.column.bg-main2[.content.vmiddle.center[
+## This tells the `glm` function how we would like to model our response. For **binary** response data, we use the `binomial` family. Further, there are many ways we can link our linear combination of predictors to the 0,1 space. Since we are using the **logistic** link, we use `logit` link. Other common links include the `probit` and `cloglog` links.
+]]
+
+---
+# GLM meme
+
+---
+
+class: middle center bg-main1
+
+<span>&lt;i class="fas  fa-exclamation-triangle fa-7x faa-flash animated "&gt;&lt;/i&gt;</span>
+
+# Some considerations when using Logistic Regression!
+
+---
+
+class: middle center bg-main1
+
+&lt;img src="images/warning.jpg", width="70%"&gt;
+
+
+---
+
+# Multiple regression
+
+---
+
+# Example 
+
+---
+
+# The Lasso
+
+---
+
+class: middle center bg-main1
+
+## We can think of LASSO regression as only having a certain amount of coefficient size to allocate, forcing some to get none!
+
+
+&lt;iframe width="800" height="450" src="https://www.youtube.com/embed/08drNP-tZbI?rel=0&amp;amp;showinfo=0&amp;amp;start=10" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen&gt;&lt;/iframe&gt;
+
+
+---
+
+
+layout: false
+class: bg-main3 split-30 hide-slide-number
+
+.column[
+
+]
+.column.slide-in-right[.content.vmiddle[
+.sliderbox.shade_main.pad1[
+.font5[Classification]
+]
+]]
+
+---
+# Different data types require different machine learning methods
+
+While we can indeed use Logistic regression to **classify** data points, this simply isn't feasible when
+
+We have high class seperation in our data
+We have a non-linear combination of predictors influcing our response
+
+
+So, what other options do we have?
+---
+
+# Decision Trees
+
+---
+
+# Decision Trees in R using `rpart`
+
+---
+
+# A single tree is prone to overfitting
+
+&lt;br&gt;
+
+&lt;center&gt;
+
+  &lt;img src="images/overfit.jpg", width="60%"&gt;
+
+&lt;/center&gt;
+
+&lt;br&gt;
+
+
+---
+
+# Concept: Bagging
+
+
+---
+
+# Random Forest
+
+
+---
+
+# Random Forest in R from `library(RandomForest)`
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

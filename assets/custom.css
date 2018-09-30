@@ -1,0 +1,23 @@
+/* customising title background needs to be via remark-slide due to how default title slides are defined*/
+  .remark-slide {
+    background-image: url("https://emitanaka.github.io/ninja-theme/images/R-LadiesGlobal-transparent.png …"), url("../bkgs/bg1.jpg");
+    background-size:  10%, cover;
+    background-position: left bottom, 100%;
+    background-repeat: no-repeat;
+  }
+
+.width70 {
+  width: 70%;
+}
+
+.borderit {
+  border-style: solid;
+  border-width: 4px;
+  border-color: black;
+}
+
+.p-canvas-webgl {
+  position: fixed;
+  z-index: 1;
+  top: 0; left: 0;
+}

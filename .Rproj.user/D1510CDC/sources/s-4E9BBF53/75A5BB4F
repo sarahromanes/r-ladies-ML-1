@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1538278470834.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "75A5BB4F",
+    "lastKnownWriteTime" : 1535451573,
+    "last_content_update" : 1535451573,
+    "path" : "C:/Users/sarah/Dropbox (Sydney Uni)/Uni/PhD/Misc/RandomScripts/SDLineExample.Rmd",
+    "project_path" : null,
+    "properties" : {
+        "chunk_output_type" : "console"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

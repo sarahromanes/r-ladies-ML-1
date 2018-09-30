@@ -1,0 +1,24 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1538273848461.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "A68C3F73",
+    "lastKnownWriteTime" : 1538314215,
+    "last_content_update" : -2147483648,
+    "path" : "C:/Users/sarah/Dropbox (Sydney Uni)/other-website/r-ladies-workshop-1/index.Rmd",
+    "project_path" : "index.Rmd",
+    "properties" : {
+        "cursorPosition" : "273,27",
+        "last_setup_crc32" : "4E9BBF5314017639",
+        "scrollLine" : "256",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

@@ -1,0 +1,95 @@
+---
+title: "My first gganimate - exploring concepts from first year linear modelling!"
+author: "Sarah Romanes"
+date: "28 August 2018"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+Have you ever had one of those moments whilst teaching where the content blows your mind? Today, whilst teaching MATH1005 at the University of Sydney, that exact thing happened to me.
+
+This weeks content was focused on teaching the students the introductions to linear modelling. A very strightforward topic, and one ususally understood well by first years. However, a twist in our teaching style left me with such an appreciation for the simpler explanations in statistics. 
+
+Throwing back to 6 years ago when I was a first year, and even back to a year ago when I first taught this course, linear regression was taught in a very standard way. If I have some continuous bivariate data, and the relationship between the two variables looks linear upon inspection, how can one fit a line which is 'optimal'? The standard way of answering this question is to treat the problem as a mathematical one, using calculus to find the slope and intercept that minimise the sum of squares between the fitted line and the observed responses. This usually is very easy to understand by first years, and seemed the simplest possible way of explanation I could concieve. However, I was stunned this week at how an even simpler (and perhaps more elegant) derivation of the same regression line we all know and love can be arrived to.
+
+## The SD Line
+
+What is the SD line, you might ask? For me, it was not a concept I was familar with until teaching this course. See here for a more detailed understanding (Freedman etc).
+
+Imagine you are trying to find the best line to fit the data, without any knowledge of calculus. How do you do it? An intuitive way might be to connect the point of averages $(\bar{x}, \bar{y})$ to $(\bar{x} + \text{SD}_x, \bar{y} + \text{SD}_y)$
+
+
+
+
+## A fix? The regression line
+
+## Visualisations
+
+## ``gganimate` - a success!
+
+```{r}
+library(ggplot2)
+library(gganimate)
+library(dplyr)
+library(magrittr)
+```
+
+```{r}
+ggplot(mtcars, aes(factor(cyl), mpg)) + 
+  geom_boxplot() + 
+  # Here comes the gganimate code
+  transition_states(
+    gear,
+    transition_length = 2,
+    state_length = 1
+  ) +
+  enter_fade() + 
+  exit_shrink() +
+  ease_aes('sine-in-out')
+
+```
+
+```{r}
+
+gen.y <- function(x, rho) {
+  y <- rnorm(length(x)) 
+  x.perp <- residuals(lm(y ~ x))
+  rho * sd(x.perp) * x + x.perp * sd(x) * sqrt(1 - rho^2)
+}
+
+x <- 0:50
+r <- seq(0, -1, by=-0.05)
+
+y.vals <- unlist(purrr::map(r, ~gen.y(x, .)))
+x.vals <- rep(x, length(r))
+r.vals <- rep(r, each=length(x))
+
+
+data <- data.frame(x.vals=x.vals, y.vals=y.vals, r.vals=r.vals)
+head(data)
+
+
+###############################
+
+p <- ggplot( data %>% group_by(r.vals) %>% mutate(slope.sd=sd(y.vals)/sd(x.vals), 
+                                     icept.sd= mean(y.vals)- (sd(y.vals)/sd(x.vals))*mean(x.vals),
+                                     slope.r=r.vals*sd(y.vals)/sd(x.vals),
+                                     icept.r= mean(y.vals)- (r.vals*sd(y.vals)/sd(x.vals))*mean(x.vals))
+             , aes(x.vals, y.vals)) + 
+  geom_point() + 
+  geom_abline(aes(intercept=icept.sd, slope=slope.sd), col="red") +
+  geom_abline(aes(intercept=icept.r, slope=slope.r), col="blue")
+
+
+
+p1 <- p + labs(title = 'Correlation Coefficient =  {round(frame_time, 2)}', x = 'x', y = 'y') +
+  transition_time(r.vals) +
+  ease_aes('linear')
+
+p1
+
+
+
+```
+
