@@ -171,7 +171,7 @@ fit &lt;-  lm(data=data,
 ```
 ]]
 .column.bg-main3[.content.vmiddle.center[
-# This tells the `glm` function what variables we would like to regress. R expects the relationship in the form of `response~predictors`. 
+## This tells the `lm` function what variables we would like to regress. R expects the relationship in the form of `response~predictors`. 
 ]]
 
 ---
@@ -294,7 +294,48 @@ New_Data &lt;-  data.frame(Education = c(15, 18))
 
 ---
 
-# Binary outcomes - a case for Logistic Regression
+class: split-two white 
+
+.column.bg-main1[.content[
+
+# Modelling Binary Outcomes
+
+&lt;br&gt;
+
+### Consider the dataset `Spiders`, (citation here), from a study which looked at the relationship between `GrainSize` of sand and `Spiders` presence.
+
+
+```r
+data &lt;- read.csv("data/Spiders.csv")
+head(data)
+```
+
+```
+##   GrainSize Spiders
+## 1     0.245       0
+## 2     0.247       0
+## 3     0.285       1
+## 4     0.299       1
+## 5     0.327       1
+## 6     0.347       1
+```
+
+&lt;center&gt;
+
+Can we use a simple linear model to predict the presence of a spider a new data point?
+
+&lt;/center&gt;
+
+]]
+
+.column[.content.vmiddle.center[
+
+
+&lt;img src="index_files/figure-html/unnamed-chunk-10-1.png" width="504" /&gt;
+
+
+]]
+
 
 
 ---
@@ -303,34 +344,38 @@ New_Data &lt;-  data.frame(Education = c(15, 18))
 class: split-two white
 
 .column.bg-main1[.content[
-# To model **binary data**, we need to **link** our **predictors** to our response using a *link function*.
 
+## To model **binary data**, we need to **link** our **predictors** to our response using a *link function*.
+
+&lt;br&gt;
+
+### Instead of predicting the outcome directly, we instead predict the probability of being class 1, given the linear combination of predictors, as follows:
+
+$$ p(y=1|\\beta_0 + \\beta_1 x)  = \\sigma(\\beta_0 + \\beta_1 x) $$
+
+For the logistic (`logit`) link
+
+$$ p(y=1|\\beta_0 + \\beta_1 x)  = \\frac{1}{1+ \\exp( - (\\beta_0 + \\beta_1 x))} $$
+
+For the probit (`probit`) link
+
+$$ p(y=1|\\beta_0 + \\beta_1 x)  = \\Phi(\\beta_0 + \\beta_1 x) $$
 
 
 ]]
 .column.white[.content.vmiddle.center[
-&lt;img src="index_files/figure-html/unnamed-chunk-9-1.png" width="504" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-11-1.png" width="504" /&gt;
 
 ]]
 
 ---
 
-# Shiny app
-
----
-
-# 2 split, glm and predict
-
----
-
-class: split-two white
+class: split-60 white
 
 .column.bg-main1[.content[
 # We can fit a glm in R using the `glm` function as follows:
 
 &lt;br&gt;
-
-
 
 
 
@@ -346,7 +391,7 @@ class: split-two white
 
 ---
 
-class: split-two white
+class: split-60 white
 
 .column.bg-main1[.content[
 # We can fit a glm in R using the `glm` function as follows:
@@ -361,12 +406,12 @@ fit &lt;-  glm(data=data,
 ```
 ]]
 .column.bg-main3[.content.vmiddle.center[
-# This tells the `glm` function what variables we would like to regress. Just like the `lm` function, R expects the relationship in the form of `response~predictors`. 
+## This tells the `glm` function what variables we would like to regress. Just like the `lm` function, R expects the relationship in the form of `response~predictors`. 
 ]]
 
 ---
 
-class: split-two white
+class: split-60 white
 
 .column.bg-main1[.content[
 # We can fit a glm in R using the `glm` function as follows:
@@ -379,13 +424,128 @@ fit &lt;-  glm(data=data,
             Spiders~GrainSize, 
 *           family=binomial(link="logit"))
 ```
+
+&lt;center&gt;
+  OR
+&lt;/center&gt;
+
+
+```r
+fit &lt;-  glm(data=data, 
+            Spiders~GrainSize, 
+*           family=binomial(link="probit"))
+```
+
+
+&lt;center&gt;
+  OR
+&lt;/center&gt;
+
+
+```r
+fit &lt;-  glm(data=data, 
+            Spiders~GrainSize, 
+*           family=binomial(link="cloglog"))
+```
+
+&lt;center&gt;
+  and more...
+&lt;/center&gt;
+
 ]]
 .column.bg-main3[.content.vmiddle.center[
-## This tells the `glm` function how we would like to model our response. For **binary** response data, we use the `binomial` family. Further, there are many ways we can link our linear combination of predictors to the 0,1 space. Since we are using the **logistic** link, we use `logit` link. Other common links include the `probit` and `cloglog` links.
+## This tells the `glm` function how we would like to model our response. For **binary** response data, we use the `binomial` family. 
+
+## Further, there are many ways we can link our linear combination of predictors to the 0,1 space. 
 ]]
 
 ---
-# GLM meme
+
+class: split-60 white
+
+.column.bg-main1[.content[
+# We can fit a glm in R using the `glm` function as follows:
+
+&lt;br&gt;
+
+
+```r
+fit &lt;-  glm(data=data, 
+            Spiders~GrainSize, 
+            family=binomial(link="logit"))
+summary(fit)
+```
+
+```r
+Call:
+glm(formula = Spiders ~ GrainSize, family = binomial(link = "logit"), 
+    data = data)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.7406  -1.0781   0.4837   0.9809   1.2582  
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)  
+*(Intercept)   -1.648      1.354  -1.217   0.2237
+*GrainSize      5.122      3.006   1.704   0.0884 .
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+```
+]]
+.column.bg-main3[.content.vmiddle.center[
+## Similar to the `lm` function, we can use the `summary` function to examine regression coefficients.
+]]
+
+
+---
+
+class: split-60 white
+
+.column.bg-main1[.content[
+# We can fit a glm in R using the `glm` function as follows:
+
+&lt;br&gt;
+
+
+
+
+```r
+fit &lt;-  glm(data=data, 
+            Spiders~GrainSize, 
+            family=binomial(link="logit"))
+
+New_Data &lt;-  data.frame(GrainSize = c(0.4, 0.87))
+*probs &lt;- predict(fit, New_Data,type="response")
+probs 
+```
+
+```
+##         1         2 
+## 0.5989270 0.9431134
+```
+
+```r
+*round(probs)
+```
+
+```
+## 1 2 
+## 1 1
+```
+]]
+.column.bg-main3[.content.vmiddle.center[
+## And we can also use the `predict` function to estimate class membership probability, as well as use the `round` command to estimate class.
+]]
+
+
+---
+
+class: middle center bg-main1
+
+## Of course, probabilities close to 0.5 are hard to classify!!
+
+&lt;img src="images/response.jpg", width="70%"&gt;
 
 ---
 
@@ -393,7 +553,7 @@ class: middle center bg-main1
 
 <span>&lt;i class="fas  fa-exclamation-triangle fa-7x faa-flash animated "&gt;&lt;/i&gt;</span>
 
-# Some considerations when using Logistic Regression!
+# A warning for using GLMs!
 
 ---
 
@@ -409,11 +569,11 @@ ggplot(data.new,
        geom_point(col="red", size=3)
 ```
 
-&lt;img src="index_files/figure-html/unnamed-chunk-14-1.png" width="504" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-21-1.png" width="504" /&gt;
 ]]
 
 .column.bg-main3[.content.vmiddle.center[
-## This tells the `glm` function how we would like to model our response. For **binary** response data, we use the `binomial` family. Further, there are many ways we can link our linear combination of predictors to the 0,1 space. Since we are using the **logistic** link, we use `logit` link. Other common links include the `probit` and `cloglog` links.
+## Suppose the scientist who collected their data thought the study would look more convincing if the data was **perfectly** sepatated, and sneakily modified their results. How would their glm look?
 ]]
 
 ---
@@ -437,10 +597,11 @@ fit &lt;-  glm(data=data.new,
 ## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
 ```
 
+
 ]]
 
 .column.bg-main3[.content.vmiddle.center[
-## Warnings appear when we try and fit this glm, and, when we look at the `summary()`...
+## Warnings appear when we try and fit this glm...
 ]]
 
 ---
@@ -486,7 +647,9 @@ Coefficients:
 ]]
 
 .column.bg-main3[.content.vmiddle.center[
-## Warnings appear when we try and fit this glm, and, when we look at the `summary()`...
+## Warnings appear when we try and fit this glm...
+
+## ...and, when we look at the `summary`, we can see our regression coefficients are blowing up, as well as the standard errors associated with them! 
 ]]
 
 
@@ -498,11 +661,83 @@ class: middle center bg-main1
 
 ---
 
-# Multiple regression
+class: split-two white 
+
+.column.bg-main1[.content[
+
+&lt;br&gt;
+
+# Multiple Regression
+
+&lt;br&gt;
+
+### Can we fit a model with more than one predictor? Of course we can! Consider the dataset `Exam`, where two exam scores are given for each student, and a Label represents whether they passed or failed the course.
+
+
+```r
+data&lt;- read.csv("data/Exam.csv", header=T)
+head(data)
+```
+
+```
+##      Exam1    Exam2 Label
+## 1 34.62366 78.02469     0
+## 2 30.28671 43.89500     0
+## 3 35.84741 72.90220     0
+## 4 60.18260 86.30855     1
+## 5 79.03274 75.34438     1
+## 6 45.08328 56.31637     0
+```
+
+]]
+
+.column[.content.vmiddle.center[
+
+
+&lt;img src="index_files/figure-html/unnamed-chunk-27-1.png" width="504" /&gt;
+
+
+]]
+
 
 ---
 
-# Example 
+class: split-60 white
+
+.column.bg-main1[.content[
+# We can fit a glm in R using the `glm` function as follows:
+
+&lt;br&gt;
+
+
+```r
+fit &lt;-  glm(data=data, 
+*           Label ~ .,
+            family=binomial(link="logit")) 
+summary(fit)
+```
+
+```r
+Call:
+glm(formula = Label ~ ., family = binomial(link = "logit"), 
+    data = data)
+
+Deviance Residuals: 
+     Min        1Q    Median        3Q       Max  
+-2.19287  -0.18009   0.01577   0.19578   1.78527  
+
+Coefficients:
+             Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept) -25.16133    5.79836  -4.339 1.43e-05 ***
+Exam1         0.20623    0.04800   4.297 1.73e-05 ***
+Exam2         0.20147    0.04862   4.144 3.42e-05 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+```
+]]
+.column.bg-main3[.content.vmiddle.center[
+### The formula `Label ~ . ` tells the `glm` funcion to regress against all (two) predictors, `Exam1` and `Exam2`.
+]]
 
 ---
 
@@ -534,6 +769,13 @@ class: bg-main3 split-30 hide-slide-number
 ]]
 
 ---
+
+class: middle center bg-main1
+
+&lt;img src="images/food.jpg", width="65%"&gt;
+
+---
+
 
 class: split-two white 
 
@@ -570,7 +812,7 @@ head(data)
 .column[.content.vmiddle.center[
 
 
-&lt;img src="index_files/figure-html/unnamed-chunk-20-1.png" width="504" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-31-1.png" width="504" /&gt;
 
 
 ]]
@@ -586,6 +828,24 @@ We have a non-linear combination of predictors influcing our response
 
 
 So, what other options do we have?
+
+---
+class: split-two white 
+
+.column.bg-main1[.content[
+
+# The K-Nearest Neighbours Algorithm
+
+Credit to Natasha Latysheva for image
+
+]]
+
+.column[.content.vmiddle.center[
+
+&lt;img src="images/knn2-Natasha-Latysheva.jpg", width="80%"&gt;
+
+
+]]
 
 
 ---
@@ -642,7 +902,7 @@ library(MASS)
 
 .black[Next, we need to give the function new data points, as the `knn` function fits and predicts at the same time. We will use the `MASS` package to generate a grid of new points to predict the class of.]
 
-&lt;img src="index_files/figure-html/unnamed-chunk-23-1.png" width="504" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-34-1.png" width="504" /&gt;
 
 ]]
 
@@ -721,7 +981,7 @@ We can plot the decision boundaries, as well as the classification of our new po
 
 .column[.content.vmiddle.center[
 
-&lt;img src="index_files/figure-html/unnamed-chunk-26-1.png" width="504" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-37-1.png" width="504" /&gt;
 ]]
 
 
@@ -767,7 +1027,7 @@ We can also see how our decisions change based on the number of neighbours we co
 
 .column[.content.vmiddle.center[
 
-&lt;img src="index_files/figure-html/unnamed-chunk-28-1.png" width="504" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-39-1.png" width="504" /&gt;
 ]]
 
 
@@ -796,7 +1056,7 @@ tree &lt;- rpart(Species ~ ., data = iris, method = "class")
 rpart.plot(tree)
 ```
 
-&lt;img src="index_files/figure-html/unnamed-chunk-29-1.png" width="504" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-40-1.png" width="504" /&gt;
 ]]
 
 .column.bg-main3[.content.vmiddle.center[
@@ -813,7 +1073,7 @@ rpart.plot(tree)
 
 &lt;center&gt;
 
-  &lt;img src="images/overfit.jpg", width="60%"&gt;
+  &lt;img src="images/overfit.jpg", width="70%"&gt;
 
 &lt;/center&gt;
 
@@ -914,7 +1174,7 @@ class: split-two white
 rpart.plot(tree.SRBCT)
 ```
 
-&lt;img src="index_files/figure-html/unnamed-chunk-32-1.png" width="504" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-43-1.png" width="504" /&gt;
 ]]
 
 .column.bg-main3[.content.vmiddle.center[

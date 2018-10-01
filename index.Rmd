@@ -177,7 +177,7 @@ fit <-  lm(data=data,
 ```
 ]]
 .column.bg-main3[.content.vmiddle.center[
-# This tells the `glm` function what variables we would like to regress. R expects the relationship in the form of `response~predictors`. 
+## This tells the `lm` function what variables we would like to regress. R expects the relationship in the form of `response~predictors`. 
 ]]
 
 ---
@@ -290,7 +290,39 @@ predict(fit, New_Data) #<<
 
 ---
 
-# Binary outcomes - a case for Logistic Regression
+class: split-two white 
+
+.column.bg-main1[.content[
+
+# Modelling Binary Outcomes
+
+<br>
+
+### Consider the dataset `Spiders`, Suzuki et al. (2006) , from a study which looked at the relationship between `GrainSize` of sand and `Spiders` presence.
+
+```{r}
+data <- read.csv("data/Spiders.csv")
+head(data)
+```
+
+<center>
+
+Can we use a simple linear model to predict the presence of a spider a new data point?
+
+</center>
+
+]]
+
+.column[.content.vmiddle.center[
+
+
+```{r, fig.retina=4, echo=FALSE}
+ggplot(data, aes(x=GrainSize, y=Spiders))+geom_point(size=3, color="red")
+```
+
+
+]]
+
 
 
 ---
@@ -299,8 +331,22 @@ predict(fit, New_Data) #<<
 class: split-two white
 
 .column.bg-main1[.content[
-# To model **binary data**, we need to **link** our **predictors** to our response using a *link function*.
 
+## To model **binary data**, we need to **link** our **predictors** to our response using a *link function*.
+
+<br>
+
+### Instead of predicting the outcome directly, we instead predict the probability of being class 1, given the linear combination of predictors, as follows:
+
+$$ p(y=1|\\beta_0 + \\beta_1 x)  = \\sigma(\\beta_0 + \\beta_1 x) $$
+
+For the logistic (`logit`) link
+
+$$ p(y=1|\\beta_0 + \\beta_1 x)  = \\frac{1}{1+ \\exp( - (\\beta_0 + \\beta_1 x))} $$
+
+For the probit (`probit`) link
+
+$$ p(y=1|\\beta_0 + \\beta_1 x)  = \\Phi(\\beta_0 + \\beta_1 x) $$
 
 
 ]]
@@ -322,24 +368,12 @@ ggplot(data, aes(x=x, y=y, color=Link))+geom_line(size=1.4) + xlab(TeX('$\\beta_
 
 ---
 
-# Shiny app
-
----
-
-# 2 split, glm and predict
-
----
-
-class: split-two white
+class: split-60 white
 
 .column.bg-main1[.content[
 # We can fit a glm in R using the `glm` function as follows:
 
 <br>
-
-```{r, echo=F}
-data <- read.csv("data/Spiders.csv")
-```
 
 
 ```{r, eval=F}
@@ -354,7 +388,7 @@ fit <-  glm(data=data, #<<
 
 ---
 
-class: split-two white
+class: split-60 white
 
 .column.bg-main1[.content[
 # We can fit a glm in R using the `glm` function as follows:
@@ -368,12 +402,12 @@ fit <-  glm(data=data,
 ```
 ]]
 .column.bg-main3[.content.vmiddle.center[
-# This tells the `glm` function what variables we would like to regress. Just like the `lm` function, R expects the relationship in the form of `response~predictors`. 
+## This tells the `glm` function what variables we would like to regress. Just like the `lm` function, R expects the relationship in the form of `response~predictors`. 
 ]]
 
 ---
 
-class: split-two white
+class: split-60 white
 
 .column.bg-main1[.content[
 # We can fit a glm in R using the `glm` function as follows:
@@ -385,13 +419,113 @@ fit <-  glm(data=data,
             Spiders~GrainSize, 
             family=binomial(link="logit")) #<<
 ```
+
+<center>
+  OR
+</center>
+
+```{r, eval=F}
+fit <-  glm(data=data, 
+            Spiders~GrainSize, 
+            family=binomial(link="probit")) #<<
+```
+
+
+<center>
+  OR
+</center>
+
+```{r, eval=F}
+fit <-  glm(data=data, 
+            Spiders~GrainSize, 
+            family=binomial(link="cloglog")) #<<
+```
+
+<center>
+  and more...
+</center>
+
 ]]
 .column.bg-main3[.content.vmiddle.center[
-## This tells the `glm` function how we would like to model our response. For **binary** response data, we use the `binomial` family. Further, there are many ways we can link our linear combination of predictors to the 0,1 space. Since we are using the **logistic** link, we use `logit` link. Other common links include the `probit` and `cloglog` links.
+## This tells the `glm` function how we would like to model our response. For **binary** response data, we use the `binomial` family. 
+
+## Further, there are many ways we can link our linear combination of predictors to the 0,1 space. 
 ]]
 
 ---
-# GLM meme
+
+class: split-60 white
+
+.column.bg-main1[.content[
+# We can fit a glm in R using the `glm` function as follows:
+
+<br>
+
+```{r, eval=F}
+fit <-  glm(data=data, 
+            Spiders~GrainSize, 
+            family=binomial(link="logit"))
+summary(fit)
+```
+```{r, eval=F}
+Call:
+glm(formula = Spiders ~ GrainSize, family = binomial(link = "logit"), 
+    data = data)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.7406  -1.0781   0.4837   0.9809   1.2582  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)  
+(Intercept)   -1.648      1.354  -1.217   0.2237  #<<
+GrainSize      5.122      3.006   1.704   0.0884 . #<<
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+```
+]]
+.column.bg-main3[.content.vmiddle.center[
+## Similar to the `lm` function, we can use the `summary` function to examine regression coefficients.
+]]
+
+
+---
+
+class: split-60 white
+
+.column.bg-main1[.content[
+# We can fit a glm in R using the `glm` function as follows:
+
+<br>
+
+```{r, echo=F}
+data <- read.csv("data/Spiders.csv")
+```
+
+```{r, eval=T}
+fit <-  glm(data=data, 
+            Spiders~GrainSize, 
+            family=binomial(link="logit"))
+
+New_Data <-  data.frame(GrainSize = c(0.4, 0.87))
+probs <- predict(fit, New_Data,type="response") #<<
+probs 
+round(probs) #<<
+```
+]]
+.column.bg-main3[.content.vmiddle.center[
+## And we can also use the `predict` function to estimate class membership probability, as well as use the `round` command to estimate class.
+]]
+
+
+---
+
+class: middle center bg-main1
+
+## Of course, probabilities close to 0.5 are hard to classify!!
+
+<img src="images/response.jpg", width="70%">
 
 ---
 
@@ -399,7 +533,7 @@ class: middle center bg-main1
 
 `r anicon::faa('exclamation-triangle', animate='flash', size=7)`
 
-# Some considerations when using Logistic Regression!
+# A warning for using GLMs!
 
 ---
 
@@ -407,7 +541,7 @@ class: split-two white
 
 .column[.content[
 
-```{r, fig.retina=2}
+```{r, fig.retina=4}
 data.new <- read.csv("data/SpidersWarning.csv")
 ggplot(data.new, 
        aes(x=GrainSize, y=Spiders)) +
@@ -416,7 +550,7 @@ ggplot(data.new,
 ]]
 
 .column.bg-main3[.content.vmiddle.center[
-## This tells the `glm` function how we would like to model our response. For **binary** response data, we use the `binomial` family. Further, there are many ways we can link our linear combination of predictors to the 0,1 space. Since we are using the **logistic** link, we use `logit` link. Other common links include the `probit` and `cloglog` links.
+## Suppose the scientist who collected their data thought the study would look more convincing if the data was **perfectly** sepatated, and sneakily modified their results. How would their glm look?
 ]]
 
 ---
@@ -431,10 +565,11 @@ fit <-  glm(data=data.new,
             family=binomial(link="logit"))
 ```
 
+
 ]]
 
 .column.bg-main3[.content.vmiddle.center[
-## Warnings appear when we try and fit this glm, and, when we look at the `summary()`...
+## Warnings appear when we try and fit this glm...
 ]]
 
 ---
@@ -470,7 +605,9 @@ GrainSize     1569.2   624478.6   0.003    0.998 #<<
 ]]
 
 .column.bg-main3[.content.vmiddle.center[
-## Warnings appear when we try and fit this glm, and, when we look at the `summary()`...
+## Warnings appear when we try and fit this glm...
+
+## ...and, when we look at the `summary`, we can see our regression coefficients are blowing up, as well as the standard errors associated with them! 
 ]]
 
 
@@ -482,11 +619,72 @@ class: middle center bg-main1
 
 ---
 
-# Multiple regression
+class: split-two white 
+
+.column.bg-main1[.content[
+
+<br>
+
+# Multiple Regression
+
+<br>
+
+### Can we fit a model with more than one predictor? Of course we can! Consider the dataset `Exam`, where two exam scores are given for each student, and a Label represents whether they passed or failed the course.
+
+```{r, fig.retina=4}
+data<- read.csv("data/Exam.csv", header=T)
+head(data)
+```
+
+]]
+
+.column[.content.vmiddle.center[
+
+
+```{r, fig.retina=4, echo=FALSE}
+ggplot(data, aes(x=Exam1, y=Exam2, color=factor(Label)))+geom_point(size=4)
+```
+
+
+]]
+
 
 ---
 
-# Example 
+class: split-60 white
+
+.column.bg-main1[.content[
+# We can fit a glm in R using the `glm` function as follows:
+
+<br>
+
+```{r, eval=F}
+fit <-  glm(data=data, 
+            Label ~ ., #<<
+            family=binomial(link="logit")) 
+summary(fit)
+```
+```{r, eval=F}
+Call:
+glm(formula = Label ~ ., family = binomial(link = "logit"), 
+    data = data)
+
+Deviance Residuals: 
+     Min        1Q    Median        3Q       Max  
+-2.19287  -0.18009   0.01577   0.19578   1.78527  
+
+Coefficients:
+             Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -25.16133    5.79836  -4.339 1.43e-05 ***
+Exam1         0.20623    0.04800   4.297 1.73e-05 ***
+Exam2         0.20147    0.04862   4.144 3.42e-05 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+```
+]]
+.column.bg-main3[.content.vmiddle.center[
+### The formula `Label ~ . ` tells the `glm` funcion to regress against all (two) predictors, `Exam1` and `Exam2`.
+]]
 
 ---
 
@@ -519,6 +717,13 @@ class: bg-main3 split-30 hide-slide-number
 
 ---
 
+class: middle center bg-main1
+
+<img src="images/food.jpg", width="65%">
+
+---
+
+
 class: split-two white 
 
 .column.bg-main1[.content[
@@ -531,7 +736,7 @@ class: split-two white
 
 ## Consider the dataset `Microchips`,
 
-```{r, fig.retina=2}
+```{r, fig.retina=4}
 data <- read.csv("data/Microchips.csv")
 head(data)
 ```
@@ -561,6 +766,24 @@ We have a non-linear combination of predictors influcing our response
 
 
 So, what other options do we have?
+
+---
+class: split-two white 
+
+.column.bg-main1[.content[
+
+# The K-Nearest Neighbours Algorithm
+
+Credit to Natasha Latysheva for image
+
+]]
+
+.column[.content.vmiddle.center[
+
+<img src="images/knn2-Natasha-Latysheva.jpg", width="80%">
+
+
+]]
 
 
 ---
@@ -616,27 +839,18 @@ new.X <- expand.grid(x=seq(min(X[,1]-0.5), max(X[,1]+0.5),#<<
 .black[Next, we need to give the function new data points, as the `knn` function fits and predicts at the same time. We will use the `MASS` package to generate a grid of new points to predict the class of.]
 
 ```{r, fig.retina=4, echo=FALSE, warning=FALSE, message=FALSE}
-train <- data[,1:2]
-cl <- as.factor(data[,3])
 
-require(MASS)
-
-test <- expand.grid(x=seq(min(train[,1]-0.5), max(train[,1]+0.5),
-                           by=0.1),
-                     y=seq(min(train[,2]-0.5), max(train[,2]+0.5), 
-                           by=0.1))
- 
 require(class)
-classif <- knn(train, test, cl, k = 4, prob=TRUE)
+classif <- knn(X, new.X, cl, k = 4, prob=TRUE)
 prob <- attr(classif, "prob")
  
  
-dataf <- bind_rows(mutate(test,
+dataf <- bind_rows(mutate(new.X,
                            prob=prob,
                            cls=1,
                            prob_cls=ifelse(classif==cls,
                                            1, 0)),
-                    mutate(test,
+                    mutate(new.X,
                            prob=prob,
                            cls=0,
                            prob_cls=ifelse(classif==cls,
@@ -661,7 +875,7 @@ class: split-two white
 
 <br>
 
-```{r}
+```{r, eval=T}
 train <- data[,1:2]
 cl <- as.factor(data[,3])
 
@@ -694,7 +908,7 @@ class: split-two white
 
 <br>
 
-```{r}
+```{r, eval=F}
 train <- data[,1:2]
 cl <- as.factor(data[,3])
 
@@ -722,46 +936,19 @@ We can plot the decision boundaries, as well as the classification of our new po
 .column[.content.vmiddle.center[
 
 ```{r, fig.retina=4, echo=FALSE, warning=FALSE, message=FALSE}
-train <- data[,1:2]
-cl <- as.factor(data[,3])
-
- require(MASS)
-
- test <- expand.grid(x=seq(min(train[,1]-0.5), max(train[,1]+0.5),
-                           by=0.1),
-                     y=seq(min(train[,2]-0.5), max(train[,2]+0.5), 
-                           by=0.1))
- 
-  require(class)
- classif <- knn(train, test, cl, k = 4, prob=TRUE)
- prob <- attr(classif, "prob")
- 
- 
- dataf <- bind_rows(mutate(test,
-                           prob=prob,
-                           cls=1,
-                           prob_cls=ifelse(classif==cls,
-                                           1, 0)),
-                    mutate(test,
-                           prob=prob,
-                           cls=0,
-                           prob_cls=ifelse(classif==cls,
-                                           1, 0)))
-
- 
- ggplot(dataf) +
+ggplot(dataf) +
     geom_point(aes(x=x, y=y, col=cls, size=prob),
-               data = mutate(test, cls=classif), alpha=0.5) + 
+               data = mutate(new.X, cls=classif), alpha=0.5) + 
     scale_size(range=c(0.8, 2)) +
     geom_contour(aes(x=x, y=y, z=prob_cls, group=as.factor(cls), color=as.factor(cls)),
                  bins=2,
                  data=dataf) +
     geom_point(aes(x=x, y=y, col=cls),
                size=5,
-               data=data.frame(x=train[,1], y=train[,2], cls=cl)) +
+               data=data.frame(x=X[,1], y=X[,2], cls=cl)) +
     geom_point(aes(x=x, y=y),
                size=5, shape=1,
-               data=data.frame(x=train[,1], y=train[,2], cls=cl))
+               data=data.frame(x=X[,1], y=X[,2], cls=cl))
 ```
 ]]
 
@@ -808,46 +995,32 @@ We can also see how our decisions change based on the number of neighbours we co
 .column[.content.vmiddle.center[
 
 ```{r, fig.retina=4, echo=FALSE, warning=FALSE, message=FALSE}
-train <- data[,1:2]
-cl <- as.factor(data[,3])
 
- require(MASS)
-
- test <- expand.grid(x=seq(min(train[,1]-0.5), max(train[,1]+0.5),
-                           by=0.1),
-                     y=seq(min(train[,2]-0.5), max(train[,2]+0.5), 
-                           by=0.1))
- 
-  require(class)
- classif <- knn(train, test, cl, k = 10, prob=TRUE)
- prob <- attr(classif, "prob")
- 
- 
- dataf <- bind_rows(mutate(test,
+dataf <- bind_rows(mutate(new.X,
                            prob=prob,
                            cls=1,
                            prob_cls=ifelse(classif==cls,
                                            1, 0)),
-                    mutate(test,
+                    mutate(new.X,
                            prob=prob,
                            cls=0,
                            prob_cls=ifelse(classif==cls,
                                            1, 0)))
 
  
- ggplot(dataf) +
+ggplot(dataf) +
     geom_point(aes(x=x, y=y, col=cls, size=prob),
-               data = mutate(test, cls=classif), alpha=0.5) + 
+               data = mutate(new.X, cls=classif), alpha=0.5) + 
     scale_size(range=c(0.8, 2)) +
     geom_contour(aes(x=x, y=y, z=prob_cls, group=as.factor(cls), color=as.factor(cls)),
                  bins=2,
                  data=dataf) +
     geom_point(aes(x=x, y=y, col=cls),
                size=5,
-               data=data.frame(x=train[,1], y=train[,2], cls=cl)) +
+               data=data.frame(x=X[,1], y=X[,2], cls=cl)) +
     geom_point(aes(x=x, y=y),
                size=5, shape=1,
-               data=data.frame(x=train[,1], y=train[,2], cls=cl))
+               data=data.frame(x=X[,1], y=X[,2], cls=cl))
 ```
 ]]
 
@@ -868,7 +1041,7 @@ class: split-two white
 
 .column[.content[
 
-```{r, warning=F, fig.retina=2}
+```{r, warning=F, fig.retina=4}
 library(rpart)
 library(rpart.plot)
 
@@ -891,7 +1064,7 @@ rpart.plot(tree)
 
 <center>
 
-  <img src="images/overfit.jpg", width="60%">
+  <img src="images/overfit.jpg", width="70%">
 
 </center>
 
@@ -948,7 +1121,7 @@ class: split-two white
 
 .column[.content[
 
-```{r, warning=F, fig.retina=2}
+```{r, warning=F, fig.retina=4}
 tree.SRBCT <- rpart(SRBCT$vy ~ SRBCT$mX, method = "class") #<<
 rpart.plot(tree.SRBCT)
 ```
