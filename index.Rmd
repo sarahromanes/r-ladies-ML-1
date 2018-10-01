@@ -73,7 +73,7 @@ class: split-two white
 
 class: middle center bg-main1
 
-<img src="images/mlmeme.png", width="70%">
+<img src="images/mlmeme.jpg", width="70%">
 
 
 ---
