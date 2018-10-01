@@ -40,8 +40,27 @@ class: bg-main3 split-30 hide-slide-number
 
 ---
 
+class: split-two white
 
-# .purple[The basics]
+.column.bg-main1[.content.vmiddle.center[
+
+# Overview
+
+&lt;br&gt;
+
+### This two part R-Ladies workshop is designed to give you a small taster into the large field that is known as .purple[**Machine Learning**]! Today, we will cover supervised learning techniques (explained later), and next week we will cover model performance assessment.
+
+&lt;br&gt;
+
+### For a more indepth explanation of topics covered, please read the *free* Introduction to Statistical Learning textbook (James, Witten, Hastie, and Tibshirani) [here](http://www-bcf.usc.edu/~gareth/ISL/).
+
+]]
+.column.bg-main3[.content.vmiddle.center[
+&lt;center&gt;
+ &lt;img src="images/ISLR.jpg", width="70%"&gt;
+
+]]
+
 
 
 ---
@@ -87,6 +106,7 @@ class: middle center bg-main1
 
 # .purple[Supervised vs Unsupervised Learning]
 
+
 ---
 
 layout: false
@@ -115,7 +135,7 @@ class: bg-main3 split-30 hide-slide-number
 
 ---
 
-class: split-two white
+class: split-60 white
 
 .column.bg-main1[.content[
 # We can fit a linear model in R using the `lm` function as follows:
@@ -131,13 +151,13 @@ class: split-two white
             Income ~ Education)
 ```
 ]]
-.column.bg-main2[.content.vmiddle.center[
+.column.bg-main3[.content.vmiddle.center[
 # This tells the `lm` function what data we are referring to
 ]]
 
 ---
 
-class: split-two white
+class: split-60 white
 
 .column.bg-main1[.content[
 # We can fit a linear model in R using the `lm` function as follows:
@@ -150,13 +170,13 @@ fit &lt;-  lm(data=data,
 *           Income ~ Education)
 ```
 ]]
-.column.bg-main2[.content.vmiddle.center[
+.column.bg-main3[.content.vmiddle.center[
 # This tells the `glm` function what variables we would like to regress. R expects the relationship in the form of `response~predictors`. 
 ]]
 
 ---
 
-class: split-two white
+class: split-60 white
 
 .column.bg-main1[.content[
 # We can fit a linear model in R using the `lm` function as follows:
@@ -169,40 +189,129 @@ fit &lt;-  lm(data=data,
 *summary(fit)
 ```
 
-```
-## 
-## Call:
-## lm(formula = Income ~ Education, data = data)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -13.046  -2.293   0.472   3.288  10.110 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) -39.4463     4.7248  -8.349  4.4e-09 ***
-## Education     5.5995     0.2882  19.431  &lt; 2e-16 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 5.653 on 28 degrees of freedom
-## Multiple R-squared:  0.931,	Adjusted R-squared:  0.9285 
-## F-statistic: 377.6 on 1 and 28 DF,  p-value: &lt; 2.2e-16
+
+```r
+Call:
+lm(formula = Income ~ Education, data = data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-13.046  -2.293   0.472   3.288  10.110 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+*(Intercept) -39.4463     4.7248  -8.349  4.4e-09 ***
+Education     5.5995     0.2882  19.431  &lt; 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 5.653 on 28 degrees of freedom
+Multiple R-squared:  0.931,	Adjusted R-squared:  0.9285 
+F-statistic: 377.6 on 1 and 28 DF,  p-value: &lt; 2.2e-16
 ```
 
 
 
 ]]
-.column.bg-main2[.content.vmiddle.center[
+.column.bg-main3[.content.vmiddle.center[
 
 # Using the `summary` function, we ....
 ]]
 
 ---
 
+
+class: split-60 white
+
+.column.bg-main1[.content[
+# We can fit a linear model in R using the `lm` function as follows:
+
+
+
+```r
+fit &lt;-  lm(data=data, 
+            Income ~ Education)
+*summary(fit)
+```
+
+
+```r
+Call:
+lm(formula = Income ~ Education, data = data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-13.046  -2.293   0.472   3.288  10.110 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -39.4463     4.7248  -8.349  4.4e-09 *** 
+*Education     5.5995     0.2882  19.431  &lt; 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 5.653 on 28 degrees of freedom
+Multiple R-squared:  0.931,	Adjusted R-squared:  0.9285 
+F-statistic: 377.6 on 1 and 28 DF,  p-value: &lt; 2.2e-16
+```
+
+
+
+]]
+.column.bg-main3[.content.vmiddle.center[
+
+# Using the `summary` function, we ....
+]]
+
+---
+
+
+class: split-60 white
+
+.column.bg-main1[.content[
+# We can fit a linear model in R using the `lm` function as follows:
+
+
+
+```r
+fit &lt;-  lm(data=data, 
+            Income ~ Education)
+
+New_Data &lt;-  data.frame(Education = c(15, 18))
+*predict(fit, New_Data)
+```
+
+```
+##        1        2 
+## 44.54599 61.34444
+```
+
+]]
+.column.bg-main3[.content.vmiddle.center[
+
+# Using the `predict` function, we ....
+]]
+
 ---
 
 # Binary outcomes - a case for Logistic Regression
+
+
+---
+
+
+class: split-two white
+
+.column.bg-main1[.content[
+# To model **binary data**, we need to **link** our **predictors** to our response using a *link function*.
+
+
+
+]]
+.column.white[.content.vmiddle.center[
+&lt;img src="index_files/figure-html/unnamed-chunk-9-1.png" width="504" /&gt;
+
+]]
 
 ---
 
@@ -231,7 +340,7 @@ class: split-two white
             family=binomial(link="logit")) 
 ```
 ]]
-.column.bg-main2[.content.vmiddle.center[
+.column.bg-main3[.content.vmiddle.center[
 # This tells the `glm` function what data we are referring to
 ]]
 
@@ -251,7 +360,7 @@ fit &lt;-  glm(data=data,
             family=binomial(link="logit")) 
 ```
 ]]
-.column.bg-main2[.content.vmiddle.center[
+.column.bg-main3[.content.vmiddle.center[
 # This tells the `glm` function what variables we would like to regress. Just like the `lm` function, R expects the relationship in the form of `response~predictors`. 
 ]]
 
@@ -271,7 +380,7 @@ fit &lt;-  glm(data=data,
 *           family=binomial(link="logit"))
 ```
 ]]
-.column.bg-main2[.content.vmiddle.center[
+.column.bg-main3[.content.vmiddle.center[
 ## This tells the `glm` function how we would like to model our response. For **binary** response data, we use the `binomial` family. Further, there are many ways we can link our linear combination of predictors to the 0,1 space. Since we are using the **logistic** link, we use `logit` link. Other common links include the `probit` and `cloglog` links.
 ]]
 
@@ -288,10 +397,104 @@ class: middle center bg-main1
 
 ---
 
+class: split-two white
+
+.column[.content[
+
+
+```r
+data.new &lt;- read.csv("data/SpidersWarning.csv")
+ggplot(data.new, 
+       aes(x=GrainSize, y=Spiders)) +
+       geom_point(col="red", size=3)
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-14-1.png" width="504" /&gt;
+]]
+
+.column.bg-main3[.content.vmiddle.center[
+## This tells the `glm` function how we would like to model our response. For **binary** response data, we use the `binomial` family. Further, there are many ways we can link our linear combination of predictors to the 0,1 space. Since we are using the **logistic** link, we use `logit` link. Other common links include the `probit` and `cloglog` links.
+]]
+
+---
+
+class: split-60 white
+
+.column[.content[
+
+
+```r
+fit &lt;-  glm(data=data.new, 
+            Spiders~GrainSize, 
+            family=binomial(link="logit"))
+```
+
+```
+## Warning: glm.fit: algorithm did not converge
+```
+
+```
+## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+```
+
+]]
+
+.column.bg-main3[.content.vmiddle.center[
+## Warnings appear when we try and fit this glm, and, when we look at the `summary()`...
+]]
+
+---
+
+class: split-60 white
+
+.column[.content[
+
+
+```r
+fit &lt;-  glm(data=data.new, 
+            Spiders~GrainSize, 
+            family=binomial(link="logit"))
+```
+
+```
+## Warning: glm.fit: algorithm did not converge
+```
+
+```
+## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+```
+
+```r
+*summary(fit)
+```
+
+```r
+Call:
+glm(formula = Spiders ~ GrainSize, family = binomial(link = "logit"), 
+    data = data.new)
+
+Deviance Residuals: 
+       Min          1Q      Median          3Q         Max  
+-8.087e-05  -2.100e-08  -2.100e-08   2.100e-08   7.488e-05  
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)
+*(Intercept)   -912.4   362618.2  -0.003    0.998
+*GrainSize     1569.2   624478.6   0.003    0.998
+```
+
+]]
+
+.column.bg-main3[.content.vmiddle.center[
+## Warnings appear when we try and fit this glm, and, when we look at the `summary()`...
+]]
+
+
+---
+
 class: middle center bg-main1
 
 &lt;img src="images/warning.jpg", width="70%"&gt;
-
 
 ---
 
@@ -331,6 +534,49 @@ class: bg-main3 split-30 hide-slide-number
 ]]
 
 ---
+
+class: split-two white 
+
+.column.bg-main1[.content[
+
+&lt;br&gt;
+
+# A case for K-Nearest Neighbours
+
+&lt;br&gt;
+
+## Consider the dataset `Microchips`,
+
+
+```r
+data &lt;- read.csv("data/Microchips.csv")
+head(data)
+```
+
+```
+##       Test1   Test2 Label
+## 1  0.051267 0.69956     1
+## 2 -0.092742 0.68494     1
+## 3 -0.213710 0.69225     1
+## 4 -0.375000 0.50219     1
+## 5 -0.513250 0.46564     1
+## 6 -0.524770 0.20980     1
+```
+
+
+### Can we use `glm` to predict the class for a new data point?
+]]
+
+.column[.content.vmiddle.center[
+
+
+&lt;img src="index_files/figure-html/unnamed-chunk-20-1.png" width="504" /&gt;
+
+
+]]
+
+---
+
 # Different data types require different machine learning methods
 
 While we can indeed use Logistic regression to **classify** data points, this simply isn't feasible when
@@ -340,6 +586,193 @@ We have a non-linear combination of predictors influcing our response
 
 
 So, what other options do we have?
+
+
+---
+
+class: split-two white
+
+.column.bg-main1[.content[
+
+&lt;br&gt;
+
+# KNN in R
+
+&lt;br&gt;
+
+
+```r
+X &lt;- data[,1:2]
+cl &lt;- as.factor(data[,3])
+```
+]]
+
+.column.bg-main3[.content.vmiddle.center[
+## First, we split our data into **predictors** (`X`), and response (`cl` - for *class*),
+
+]]
+
+
+---
+
+class: split-two white pink-code
+
+.column.bg-main1[.content[
+
+&lt;br&gt;
+
+# KNN in R
+
+&lt;br&gt;
+
+
+```r
+X &lt;- data[,1:2]
+cl &lt;- as.factor(data[,3])
+
+library(MASS)
+*new.X &lt;- expand.grid(x=seq(min(X[,1]-0.5), max(X[,1]+0.5),
+*                          by=0.1),
+*                    y=seq(min(X[,2]-0.5), max(X[,2]+0.5),
+*                          by=0.1))
+```
+]]
+
+.column[.content.vmiddle.center[
+
+.black[Next, we need to give the function new data points, as the `knn` function fits and predicts at the same time. We will use the `MASS` package to generate a grid of new points to predict the class of.]
+
+&lt;img src="index_files/figure-html/unnamed-chunk-23-1.png" width="504" /&gt;
+
+]]
+
+
+---
+
+class: split-two white 
+
+.column.bg-main1[.content[
+
+&lt;br&gt;
+
+# KNN in R
+
+&lt;br&gt;
+
+
+```r
+train &lt;- data[,1:2]
+cl &lt;- as.factor(data[,3])
+
+library(MASS)
+new.X &lt;- expand.grid(x=seq(min(X[,1]-0.5), max(X[,1]+0.5),
+                           by=0.1),
+                     y=seq(min(X[,2]-0.5), max(X[,2]+0.5), 
+                           by=0.1))
+ 
+library(class)
+*classif &lt;- knn(X, new.X, cl, k = 4, prob=TRUE)
+```
+]]
+
+.column.bg-main3[.content.vmiddle.center[
+
+## Now we call the `knn` function, putting in our datapoints, our new data, and the classes of the original data points, as well as how many neighbours we want to consider. In this example, we consider `k=4`.
+]]
+
+
+---
+
+class: split-two white 
+
+.column.bg-main1[.content[
+
+&lt;br&gt;
+
+# KNN in R
+
+&lt;br&gt;
+
+
+```r
+train &lt;- data[,1:2]
+cl &lt;- as.factor(data[,3])
+
+library(MASS)
+new.X &lt;- expand.grid(x=seq(min(X[,1]-0.5), max(X[,1]+0.5),
+                           by=0.1),
+                     y=seq(min(X[,2]-0.5), max(X[,2]+0.5), 
+                           by=0.1))
+ 
+library(class)
+classif &lt;- knn(X, new.X, cl, k = 4, prob=TRUE)
+```
+
+
+&lt;br&gt;
+
+&lt;center&gt;
+
+We can plot the decision boundaries, as well as the classification of our new points, as follows. Detailed R code is in slide raw files.
+
+&lt;/center&gt;
+
+]]
+
+.column[.content.vmiddle.center[
+
+&lt;img src="index_files/figure-html/unnamed-chunk-26-1.png" width="504" /&gt;
+]]
+
+
+
+---
+
+
+class: split-two white 
+
+.column.bg-main1[.content[
+
+&lt;br&gt;
+
+# KNN in R
+
+&lt;br&gt;
+
+
+```r
+train &lt;- data[,1:2]
+cl &lt;- as.factor(data[,3])
+
+library(MASS)
+new.X &lt;- expand.grid(x=seq(min(X[,1]-0.5), max(X[,1]+0.5),
+                           by=0.1),
+                     y=seq(min(X[,2]-0.5), max(X[,2]+0.5), 
+                           by=0.1))
+ 
+library(class)
+*classif &lt;- knn(X, new.X, cl, k = 10, prob=TRUE)
+```
+
+
+&lt;br&gt;
+
+&lt;center&gt;
+
+We can also see how our decisions change based on the number of neighbours we consider! Here, we consider `k=10`.
+
+&lt;/center&gt;
+
+]]
+
+.column[.content.vmiddle.center[
+
+&lt;img src="index_files/figure-html/unnamed-chunk-28-1.png" width="504" /&gt;
+]]
+
+
+
+
 ---
 
 # Decision Trees
@@ -347,6 +780,30 @@ So, what other options do we have?
 ---
 
 # Decision Trees in R using `rpart`
+
+---
+
+class: split-two white
+
+.column[.content[
+
+
+```r
+library(rpart)
+library(rpart.plot)
+
+tree &lt;- rpart(Species ~ ., data = iris, method = "class")
+rpart.plot(tree)
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-29-1.png" width="504" /&gt;
+]]
+
+.column.bg-main3[.content.vmiddle.center[
+## Using the r part function
+]]
+
+
 
 ---
 
@@ -375,7 +832,163 @@ So, what other options do we have?
 
 ---
 
-# Random Forest in R from `library(RandomForest)`
+class: split-two white
+
+.column[.content[
+
+
+```r
+library(randomForest)
+set.seed(1)
+iris.rf &lt;- randomForest(Species ~ ., iris)
+iris.rf
+```
+
+```
+## 
+## Call:
+##  randomForest(formula = Species ~ ., data = iris) 
+##                Type of random forest: classification
+##                      Number of trees: 500
+## No. of variables tried at each split: 2
+## 
+##         OOB estimate of  error rate: 4%
+## Confusion matrix:
+##            setosa versicolor virginica class.error
+## setosa         50          0         0        0.00
+## versicolor      0         47         3        0.06
+## virginica       0          3        47        0.06
+```
+]]
+
+.column.bg-main3[.content.vmiddle.center[
+## Using the `randomForest`  function
+]]
+
+---
+
+class: pink-code
+
+# .purple[A bigger example]
+
+### Let's look at the `SRBCT` dataset, from the package `multiDA`. This data has a response variable `vy`, which is a `factor` of four different cancer subtypes, and gene expression data from 1586 genes. In total, there are 63 observations.
+
+
+```r
+library(multiDA)
+class(SRBCT$vy)
+```
+
+```
+## [1] "factor"
+```
+
+```r
+table(SRBCT$vy)
+```
+
+```
+## 
+##  1  2  3  4 
+##  8 23 12 20
+```
+
+```r
+dim(SRBCT$mX)
+```
+
+```
+## [1]   63 1586
+```
+
+
+---
+
+class: split-two white
+
+.column[.content[
+
+
+```r
+*tree.SRBCT &lt;- rpart(SRBCT$vy ~ SRBCT$mX, method = "class")
+rpart.plot(tree.SRBCT)
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-32-1.png" width="504" /&gt;
+]]
+
+.column.bg-main3[.content.vmiddle.center[
+## Using the r part function
+]]
+
+---
+
+class: split-two white
+
+.column[.content[
+
+
+```r
+set.seed(1)
+*SRBCT.rf &lt;- randomForest(SRBCT$mX, SRBCT$vy)
+SRBCT.rf
+```
+
+```
+## 
+## Call:
+##  randomForest(x = SRBCT$mX, y = SRBCT$vy) 
+##                Type of random forest: classification
+##                      Number of trees: 500
+## No. of variables tried at each split: 39
+## 
+##         OOB estimate of  error rate: 0%
+## Confusion matrix:
+##   1  2  3  4 class.error
+## 1 8  0  0  0           0
+## 2 0 23  0  0           0
+## 3 0  0 12  0           0
+## 4 0  0  0 20           0
+```
+]]
+
+.column.bg-main3[.content.vmiddle.center[
+## Using the `randomForest`  function
+]]
+
+
+---
+
+
+class: split-two white
+
+.column[.content[
+
+
+```r
+set.seed(1)
+*SRBCT.rf &lt;- randomForest(SRBCT$mX, as.numeric(SRBCT$vy))
+SRBCT.rf
+```
+
+```r
+Call:
+ randomForest(x = SRBCT$mX, y = as.numeric(SRBCT$vy)) 
+*              Type of random forest: regression
+                     Number of trees: 500
+No. of variables tried at each split: 528
+
+          Mean of squared residuals: 0.1641464
+                    % Var explained: 85.07
+```
+
+]]
+
+.column.bg-main3[.content.vmiddle.center[
+
+<span>&lt;i class="fas  fa-exclamation-triangle fa-2x faa-flash animated "&gt;&lt;/i&gt;</span> Warning: when using `randomForest` make sure that your response is a **factor** if you want classification. If `SRBCT$vy` had been *numeric*, `randomForest` would have instead tried to *regress* the predictors to predict a continuous response!
+
+]]
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({

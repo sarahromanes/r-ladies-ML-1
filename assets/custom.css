@@ -1,6 +1,6 @@
 /* customising title background needs to be via remark-slide due to how default title slides are defined*/
   .remark-slide {
-    background-image: url("https://emitanaka.github.io/ninja-theme/images/R-LadiesGlobal-transparent.png …"), url("../bkgs/bg1.jpg");
+    background-image: url("https://emitanaka.github.io/ninja-theme/images/R-LadiesGlobal-transparent.png"), url("../bkg/bg1.png");
     background-size:  10%, cover;
     background-position: left bottom, 100%;
     background-repeat: no-repeat;
@@ -20,4 +20,12 @@
   position: fixed;
   z-index: 1;
   top: 0; left: 0;
+}
+
+.remark-code-line{
+  font-size: 80%;
+}
+
+.pink-code * > .remark-inline-code  {
+  color: #b22b43!important;
 }
