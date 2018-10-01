@@ -123,11 +123,53 @@ class: bg-main3 split-30 hide-slide-number
 
 ---
 
-# More Elaboration
+class: split-two white 
+
+.column.bg-main1[.content[
+&lt;br&gt;
+
+# A simple prediction problem
+
+&lt;br&gt;
+
+### Consider the simulated dataset `Income`, which looks at the relationship between `Education` (years) and `Income` (thousands).
+
+
+```r
+data &lt;- read.csv("data/Income.csv")
+head(data)
+```
+
+```
+##   Education   Income
+## 1  10.00000 26.65884
+## 2  10.40134 27.30644
+## 3  10.84281 22.13241
+## 4  11.24415 21.16984
+## 5  11.64548 15.19263
+## 6  12.08696 26.39895
+```
+
+### What shape is the relationship? Can we build a function to predict the value of a new data point?
+
+]]
+
+.column[.content.vmiddle.center[
+
+
+&lt;img src="index_files/figure-html/unnamed-chunk-2-1.png" width="504" /&gt;
+
+
+]]
+
 
 ---
 
-# Regression meme goes here
+class: middle center bg-main1
+
+## Linear Regression to the Rescue!
+
+&lt;img src="images/ols.png", width="70%"&gt;
 
 ---
 
@@ -138,7 +180,7 @@ class: bg-main3 split-30 hide-slide-number
 class: split-60 white
 
 .column.bg-main1[.content[
-# We can fit a linear model in R using the `lm` function as follows:
+# We can fit a linear model in <i class="fab  fa-r-project "></i> using the `lm` function as follows:
 
 &lt;br&gt;
 
@@ -152,7 +194,7 @@ class: split-60 white
 ```
 ]]
 .column.bg-main3[.content.vmiddle.center[
-# This tells the `lm` function what data we are referring to
+# This tells the `lm` function what data we are referring to.
 ]]
 
 ---
@@ -160,7 +202,7 @@ class: split-60 white
 class: split-60 white
 
 .column.bg-main1[.content[
-# We can fit a linear model in R using the `lm` function as follows:
+# We can fit a linear model in <i class="fab  fa-r-project "></i> using the `lm` function as follows:
 
 &lt;br&gt;
 
@@ -171,7 +213,9 @@ fit &lt;-  lm(data=data,
 ```
 ]]
 .column.bg-main3[.content.vmiddle.center[
-## This tells the `lm` function what variables we would like to regress. R expects the relationship in the form of `response~predictors`. 
+## This tells the `lm` function what variables we would like to regress. 
+
+### R expects the relationship in the form of `response~predictors`. 
 ]]
 
 ---
@@ -179,7 +223,7 @@ fit &lt;-  lm(data=data,
 class: split-60 white
 
 .column.bg-main1[.content[
-# We can fit a linear model in R using the `lm` function as follows:
+# We can fit a linear model in <i class="fab  fa-r-project "></i> using the `lm` function as follows:
 
 
 
@@ -215,7 +259,7 @@ F-statistic: 377.6 on 1 and 28 DF,  p-value: &lt; 2.2e-16
 ]]
 .column.bg-main3[.content.vmiddle.center[
 
-# Using the `summary` function, we ....
+## We can use `summary` function to examine regression coefficients, and information about the residuals of our model.
 ]]
 
 ---
@@ -224,7 +268,7 @@ F-statistic: 377.6 on 1 and 28 DF,  p-value: &lt; 2.2e-16
 class: split-60 white
 
 .column.bg-main1[.content[
-# We can fit a linear model in R using the `lm` function as follows:
+# We can fit a linear model in <i class="fab  fa-r-project "></i> using the `lm` function as follows:
 
 
 
@@ -260,7 +304,7 @@ F-statistic: 377.6 on 1 and 28 DF,  p-value: &lt; 2.2e-16
 ]]
 .column.bg-main3[.content.vmiddle.center[
 
-# Using the `summary` function, we ....
+## We can use `summary` function to examine regression coefficients, and information about the residuals of our model.
 ]]
 
 ---
@@ -269,7 +313,7 @@ F-statistic: 377.6 on 1 and 28 DF,  p-value: &lt; 2.2e-16
 class: split-60 white
 
 .column.bg-main1[.content[
-# We can fit a linear model in R using the `lm` function as follows:
+# We can fit a linear model in <i class="fab  fa-r-project "></i> using the `lm` function as follows:
 
 
 
@@ -289,7 +333,7 @@ New_Data &lt;-  data.frame(Education = c(15, 18))
 ]]
 .column.bg-main3[.content.vmiddle.center[
 
-# Using the `predict` function, we ....
+## Using the `predict` function, we can predict the `Income` of a new `Education` value (or values). 
 ]]
 
 ---
@@ -302,7 +346,7 @@ class: split-two white
 
 &lt;br&gt;
 
-### Consider the dataset `Spiders`, (citation here), from a study which looked at the relationship between `GrainSize` of sand and `Spiders` presence.
+### Consider the dataset `Spiders`, Suzuki et al. (2006) , from a study which looked at the relationship between `GrainSize` of sand and `Spiders` presence.
 
 
 ```r
@@ -320,18 +364,14 @@ head(data)
 ## 6     0.347       1
 ```
 
-&lt;center&gt;
-
-Can we use a simple linear model to predict the presence of a spider a new data point?
-
-&lt;/center&gt;
+### Can we use `lm` to predict the class for a new data point?
 
 ]]
 
 .column[.content.vmiddle.center[
 
 
-&lt;img src="index_files/figure-html/unnamed-chunk-10-1.png" width="504" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-12-1.png" width="504" /&gt;
 
 
 ]]
@@ -364,7 +404,7 @@ $$ p(y=1|\\beta_0 + \\beta_1 x)  = \\Phi(\\beta_0 + \\beta_1 x) $$
 
 ]]
 .column.white[.content.vmiddle.center[
-&lt;img src="index_files/figure-html/unnamed-chunk-11-1.png" width="504" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-13-1.png" width="504" /&gt;
 
 ]]
 
@@ -373,7 +413,7 @@ $$ p(y=1|\\beta_0 + \\beta_1 x)  = \\Phi(\\beta_0 + \\beta_1 x) $$
 class: split-60 white
 
 .column.bg-main1[.content[
-# We can fit a glm in R using the `glm` function as follows:
+# We can fit a glm in <i class="fab  fa-r-project "></i> using the `glm` function as follows:
 
 &lt;br&gt;
 
@@ -386,7 +426,7 @@ class: split-60 white
 ```
 ]]
 .column.bg-main3[.content.vmiddle.center[
-# This tells the `glm` function what data we are referring to
+# This tells the `glm` function what data we are referring to.
 ]]
 
 ---
@@ -394,7 +434,7 @@ class: split-60 white
 class: split-60 white
 
 .column.bg-main1[.content[
-# We can fit a glm in R using the `glm` function as follows:
+# We can fit a glm in <i class="fab  fa-r-project "></i> using the `glm` function as follows:
 
 &lt;br&gt;
 
@@ -414,7 +454,7 @@ fit &lt;-  glm(data=data,
 class: split-60 white
 
 .column.bg-main1[.content[
-# We can fit a glm in R using the `glm` function as follows:
+# We can fit a glm in <i class="fab  fa-r-project "></i> using the `glm` function as follows:
 
 &lt;br&gt;
 
@@ -464,7 +504,7 @@ fit &lt;-  glm(data=data,
 class: split-60 white
 
 .column.bg-main1[.content[
-# We can fit a glm in R using the `glm` function as follows:
+# We can fit a glm in <i class="fab  fa-r-project "></i> using the `glm` function as follows:
 
 &lt;br&gt;
 
@@ -503,7 +543,7 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 class: split-60 white
 
 .column.bg-main1[.content[
-# We can fit a glm in R using the `glm` function as follows:
+# We can fit a glm in <i class="fab  fa-r-project "></i> using the `glm` function as follows:
 
 &lt;br&gt;
 
@@ -569,7 +609,7 @@ ggplot(data.new,
        geom_point(col="red", size=3)
 ```
 
-&lt;img src="index_files/figure-html/unnamed-chunk-21-1.png" width="504" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-23-1.png" width="504" /&gt;
 ]]
 
 .column.bg-main3[.content.vmiddle.center[
@@ -694,7 +734,7 @@ head(data)
 .column[.content.vmiddle.center[
 
 
-&lt;img src="index_files/figure-html/unnamed-chunk-27-1.png" width="504" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-29-1.png" width="504" /&gt;
 
 
 ]]
@@ -705,7 +745,7 @@ head(data)
 class: split-60 white
 
 .column.bg-main1[.content[
-# We can fit a glm in R using the `glm` function as follows:
+# We can fit the glm in <i class="fab  fa-r-project "></i> using the `glm` function as follows:
 
 &lt;br&gt;
 
@@ -741,16 +781,34 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 
 ---
 
-# The Lasso
+class: split-two white 
 
----
+.column.bg-main1[.content[
 
-class: middle center bg-main1
+&lt;br&gt;
 
-## We can think of LASSO regression as only having a certain amount of coefficient size to allocate, forcing some to get none!
+# The Decision Boundary
+
+&lt;br&gt;
+
+We can plot the **decision boundary** on our scatterplot for `Exam1` vs `Exam2` by looking at the set of points for which our classifier predicts `$$p(y=1|\beta_0 + \beta_1 \text{Exam1} + \beta_2 \text{Exam2}) \geq 0.5$$`
 
 
-&lt;iframe width="800" height="450" src="https://www.youtube.com/embed/08drNP-tZbI?rel=0&amp;amp;showinfo=0&amp;amp;start=10" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen&gt;&lt;/iframe&gt;
+Given the `logit` link, this is true when 
+`$$\beta_0 + \beta_1 \text{Exam1} + \beta_2 \text{Exam2} \geq 0$$`
+
+This is the **decision boundary** and can be rearranged as 
+$$ \text{Exam2} \geq \frac{-\beta_0}{\beta_2} + \frac{-\beta_1}{\beta_2} \text{Exam 1} $$
+
+]]
+
+.column[.content.vmiddle.center[
+
+
+&lt;img src="index_files/figure-html/unnamed-chunk-32-1.png" width="504" /&gt;
+
+
+]]
 
 
 ---
@@ -812,7 +870,7 @@ head(data)
 .column[.content.vmiddle.center[
 
 
-&lt;img src="index_files/figure-html/unnamed-chunk-31-1.png" width="504" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-34-1.png" width="504" /&gt;
 
 
 ]]
@@ -856,7 +914,7 @@ class: split-two white
 
 &lt;br&gt;
 
-# KNN in R
+# KNN in <i class="fab  fa-r-project "></i>
 
 &lt;br&gt;
 
@@ -881,7 +939,7 @@ class: split-two white pink-code
 
 &lt;br&gt;
 
-# KNN in R
+# KNN in <i class="fab  fa-r-project "></i>
 
 &lt;br&gt;
 
@@ -902,7 +960,7 @@ library(MASS)
 
 .black[Next, we need to give the function new data points, as the `knn` function fits and predicts at the same time. We will use the `MASS` package to generate a grid of new points to predict the class of.]
 
-&lt;img src="index_files/figure-html/unnamed-chunk-34-1.png" width="504" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-37-1.png" width="504" /&gt;
 
 ]]
 
@@ -915,13 +973,13 @@ class: split-two white
 
 &lt;br&gt;
 
-# KNN in R
+# KNN in <i class="fab  fa-r-project "></i>
 
 &lt;br&gt;
 
 
 ```r
-train &lt;- data[,1:2]
+X &lt;- data[,1:2]
 cl &lt;- as.factor(data[,3])
 
 library(MASS)
@@ -949,13 +1007,13 @@ class: split-two white
 
 &lt;br&gt;
 
-# KNN in R
+# KNN in <i class="fab  fa-r-project "></i>
 
 &lt;br&gt;
 
 
 ```r
-train &lt;- data[,1:2]
+X &lt;- data[,1:2]
 cl &lt;- as.factor(data[,3])
 
 library(MASS)
@@ -981,7 +1039,7 @@ We can plot the decision boundaries, as well as the classification of our new po
 
 .column[.content.vmiddle.center[
 
-&lt;img src="index_files/figure-html/unnamed-chunk-37-1.png" width="504" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-40-1.png" width="504" /&gt;
 ]]
 
 
@@ -995,13 +1053,13 @@ class: split-two white
 
 &lt;br&gt;
 
-# KNN in R
+# KNN in <i class="fab  fa-r-project "></i>
 
 &lt;br&gt;
 
 
 ```r
-train &lt;- data[,1:2]
+X &lt;- data[,1:2]
 cl &lt;- as.factor(data[,3])
 
 library(MASS)
@@ -1027,19 +1085,19 @@ We can also see how our decisions change based on the number of neighbours we co
 
 .column[.content.vmiddle.center[
 
-&lt;img src="index_files/figure-html/unnamed-chunk-39-1.png" width="504" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-42-1.png" width="504" /&gt;
 ]]
 
 
-
-
 ---
 
-# Decision Trees
+class: middle center bg-main1
 
----
+## What other classifiers exist besides KNN?
 
-# Decision Trees in R using `rpart`
+&lt;img src="images/knn.jpg", width="60%"&gt;
+
+
 
 ---
 
@@ -1047,21 +1105,159 @@ class: split-two white
 
 .column[.content[
 
+&lt;br&gt;
+
+# .purple[Decision Trees]
+
+&lt;br&gt;
+
+
+&lt;img src="images/tree.jpg", width="90%"&gt;
+
+&lt;br&gt;
+
+
+]]
+
+.column.bg-main1[.content.vmiddle.center[
+
+### A Decision Tree determines the predictive value based on series of questions and conditions.
+
+&lt;br&gt;
+
+###  When making Decision Trees, there are several factors we take into consideration. These include - on what features do we make our decisions on? What is the threshold for classifying each question into a .yellow[**yes**] or .yellow[**no**] answer?
+
+&lt;br&gt;
+
+Image Source: [Egor Dezhic](https://becominghuman.ai)
+
+
+]]
+
+
+---
+
+class: pink-code
+
+# .purple[Decision Trees in <i class="fab  fa-r-project "></i> using `rpart`]
+
+## Consider the `iris` dataset
+
+
+```r
+head(iris)
+```
+
+```
+##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa
+## 6          5.4         3.9          1.7         0.4  setosa
+```
+
+## How can we construct a decision tree to determine the `Species` of `iris`?
+
+---
+
+class: split-two white
+
+.column.bg-main1[.content[
+
+&lt;br&gt;
+
+# Trees in <i class="fab  fa-r-project "></i>
+
 
 ```r
 library(rpart)
-library(rpart.plot)
-
-tree &lt;- rpart(Species ~ ., data = iris, method = "class")
-rpart.plot(tree)
+*tree &lt;- rpart(Species ~ ., data = iris, method = "class")
 ```
-
-&lt;img src="index_files/figure-html/unnamed-chunk-40-1.png" width="504" /&gt;
 ]]
 
 .column.bg-main3[.content.vmiddle.center[
-## Using the r part function
+## Using the `rpart` function, we build a classification tree, using the formula `Species~.` to indicate that we wish to use all the variables to predict our class.
 ]]
+
+---
+
+class: split-two white
+
+.column.bg-main1[.content[
+
+&lt;br&gt;
+
+# Trees in <i class="fab  fa-r-project "></i>
+
+
+```r
+library(rpart)
+tree &lt;- rpart(Species ~ ., data = iris, method = "class") 
+
+*library(rpart.plot)
+*rpart.plot(tree)
+```
+
+&lt;br&gt;
+
+### Futher, using the `rpart.plot` function from the `rpart.plot` library, we can visualise the results of our classification tree. 
+
+### Each node shows the predicted class, the predicted probability of each class, and the percentage of observations in each node.
+
+]]
+
+.column[.content.vmiddle.center[
+
+&lt;img src="index_files/figure-html/unnamed-chunk-46-1.png" width="504" height="70%" /&gt;
+
+
+]]
+
+---
+
+class: split-two white
+
+.column.bg-main1[.content[
+
+&lt;br&gt;
+
+# Trees in <i class="fab  fa-r-project "></i>
+
+
+```r
+library(rpart)
+tree &lt;- rpart(Species ~ ., data = iris, method = "class") 
+
+library(rpart.plot) 
+rpart.plot(tree)
+```
+
+```r
+New_Data &lt;-data.frame(Sepal.Length= 5.0, Sepal.Width = 3.9,
+                     Petal.Length = 1.4, Petal.Width = 0.3)
+*predict(tree, New_Data)
+```
+
+```
+##   setosa versicolor virginica
+## 1      1          0         0
+```
+
+&lt;br&gt;
+
+### Using `predict`, we can predict the class of a new data point, much like in the previous examples. Alternatively - we could have predicted using the tree ourselves!  
+
+]]
+
+.column[.content.vmiddle.center[
+
+&lt;img src="index_files/figure-html/unnamed-chunk-49-1.png" width="504" height="70%" /&gt;
+
+
+]]
+
 
 
 
@@ -1082,7 +1278,11 @@ rpart.plot(tree)
 
 ---
 
-# Concept: Bagging
+class: middle center
+
+# .purple[Ensemble Learning: Bagging]
+
+&lt;img src="images/bagging.png", width="90%"&gt;
 
 
 ---
@@ -1094,13 +1294,16 @@ rpart.plot(tree)
 
 class: split-two white
 
-.column[.content[
+.column.bg-main1[.content[
+
+&lt;br&gt;
+
+# `randomForest` in <i class="fab  fa-r-project "></i>
 
 
 ```r
 library(randomForest)
-set.seed(1)
-iris.rf &lt;- randomForest(Species ~ ., iris)
+*iris.rf &lt;- randomForest(Species ~ ., iris)
 iris.rf
 ```
 
@@ -1122,10 +1325,40 @@ iris.rf
 ]]
 
 .column.bg-main3[.content.vmiddle.center[
-## Using the `randomForest`  function
+## Using the `randomForest`  function, we can train our ensemble learning using the same formula we passed to `rpart`.
 ]]
 
 ---
+
+class: split-two white
+
+.column.bg-main1[.content[
+
+&lt;br&gt;
+
+# `randomForest` in <i class="fab  fa-r-project "></i>
+
+
+```r
+library(randomForest)
+iris.rf &lt;- randomForest(Species ~ ., iris) 
+*predict(iris.rf, New_Data)
+```
+
+```
+##      1 
+## setosa 
+## Levels: setosa versicolor virginica
+```
+]]
+
+.column.bg-main3[.content.vmiddle.center[
+## Again, we can use the same `New_Data` values in the `predict` function as before to reach the same prediction we did with `rpart`.
+
+]]
+
+---
+
 
 class: pink-code
 
@@ -1174,7 +1407,7 @@ class: split-two white
 rpart.plot(tree.SRBCT)
 ```
 
-&lt;img src="index_files/figure-html/unnamed-chunk-43-1.png" width="504" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-53-1.png" width="504" /&gt;
 ]]
 
 .column.bg-main3[.content.vmiddle.center[
@@ -1189,7 +1422,6 @@ class: split-two white
 
 
 ```r
-set.seed(1)
 *SRBCT.rf &lt;- randomForest(SRBCT$mX, SRBCT$vy)
 SRBCT.rf
 ```

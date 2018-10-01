@@ -129,11 +129,44 @@ class: bg-main3 split-30 hide-slide-number
 
 ---
 
-# More Elaboration
+class: split-two white 
+
+.column.bg-main1[.content[
+<br>
+
+# A simple prediction problem
+
+<br>
+
+### Consider the simulated dataset `Income`, which looks at the relationship between `Education` (years) and `Income` (thousands).
+
+```{r}
+data <- read.csv("data/Income.csv")
+head(data)
+```
+
+### What shape is the relationship? Can we build a function to predict the value of a new data point?
+
+]]
+
+.column[.content.vmiddle.center[
+
+
+```{r, fig.retina=4, echo=FALSE}
+ggplot(data, aes(x=Education, y=Income))+geom_point(size=3, color="red")  + theme(text = element_text(size=20))
+```
+
+
+]]
+
 
 ---
 
-# Regression meme goes here
+class: middle center bg-main1
+
+## Linear Regression to the Rescue!
+
+<img src="images/ols.png", width="70%">
 
 ---
 
@@ -144,7 +177,7 @@ class: bg-main3 split-30 hide-slide-number
 class: split-60 white
 
 .column.bg-main1[.content[
-# We can fit a linear model in R using the `lm` function as follows:
+# We can fit a linear model in `r icon::fa("r-project", size=1)` using the `lm` function as follows:
 
 <br>
 
@@ -159,7 +192,7 @@ fit <-  lm(data=data, #<<
 ```
 ]]
 .column.bg-main3[.content.vmiddle.center[
-# This tells the `lm` function what data we are referring to
+# This tells the `lm` function what data we are referring to.
 ]]
 
 ---
@@ -167,7 +200,7 @@ fit <-  lm(data=data, #<<
 class: split-60 white
 
 .column.bg-main1[.content[
-# We can fit a linear model in R using the `lm` function as follows:
+# We can fit a linear model in `r icon::fa("r-project", size=1)` using the `lm` function as follows:
 
 <br>
 
@@ -177,7 +210,9 @@ fit <-  lm(data=data,
 ```
 ]]
 .column.bg-main3[.content.vmiddle.center[
-## This tells the `lm` function what variables we would like to regress. R expects the relationship in the form of `response~predictors`. 
+## This tells the `lm` function what variables we would like to regress. 
+
+### R expects the relationship in the form of `response~predictors`. 
 ]]
 
 ---
@@ -185,7 +220,7 @@ fit <-  lm(data=data,
 class: split-60 white
 
 .column.bg-main1[.content[
-# We can fit a linear model in R using the `lm` function as follows:
+# We can fit a linear model in `r icon::fa("r-project", size=1)` using the `lm` function as follows:
 
 
 ```{r, eval=F}
@@ -219,7 +254,7 @@ F-statistic: 377.6 on 1 and 28 DF,  p-value: < 2.2e-16
 ]]
 .column.bg-main3[.content.vmiddle.center[
 
-# Using the `summary` function, we ....
+## We can use `summary` function to examine regression coefficients, and information about the residuals of our model.
 ]]
 
 ---
@@ -228,7 +263,7 @@ F-statistic: 377.6 on 1 and 28 DF,  p-value: < 2.2e-16
 class: split-60 white
 
 .column.bg-main1[.content[
-# We can fit a linear model in R using the `lm` function as follows:
+# We can fit a linear model in `r icon::fa("r-project", size=1)` using the `lm` function as follows:
 
 
 ```{r, eval=F}
@@ -262,7 +297,7 @@ F-statistic: 377.6 on 1 and 28 DF,  p-value: < 2.2e-16
 ]]
 .column.bg-main3[.content.vmiddle.center[
 
-# Using the `summary` function, we ....
+## We can use `summary` function to examine regression coefficients, and information about the residuals of our model.
 ]]
 
 ---
@@ -271,7 +306,7 @@ F-statistic: 377.6 on 1 and 28 DF,  p-value: < 2.2e-16
 class: split-60 white
 
 .column.bg-main1[.content[
-# We can fit a linear model in R using the `lm` function as follows:
+# We can fit a linear model in `r icon::fa("r-project", size=1)` using the `lm` function as follows:
 
 
 ```{r, eval=T}
@@ -285,7 +320,7 @@ predict(fit, New_Data) #<<
 ]]
 .column.bg-main3[.content.vmiddle.center[
 
-# Using the `predict` function, we ....
+## Using the `predict` function, we can predict the `Income` of a new `Education` value (or values). 
 ]]
 
 ---
@@ -305,11 +340,7 @@ data <- read.csv("data/Spiders.csv")
 head(data)
 ```
 
-<center>
-
-Can we use a simple linear model to predict the presence of a spider a new data point?
-
-</center>
+### Can we use `lm` to predict the class for a new data point?
 
 ]]
 
@@ -317,7 +348,7 @@ Can we use a simple linear model to predict the presence of a spider a new data 
 
 
 ```{r, fig.retina=4, echo=FALSE}
-ggplot(data, aes(x=GrainSize, y=Spiders))+geom_point(size=3, color="red")
+ggplot(data, aes(x=GrainSize, y=Spiders))+geom_point(size=3, color="red")+ theme(text = element_text(size=20))
 ```
 
 
@@ -371,7 +402,7 @@ ggplot(data, aes(x=x, y=y, color=Link))+geom_line(size=1.4) + xlab(TeX('$\\beta_
 class: split-60 white
 
 .column.bg-main1[.content[
-# We can fit a glm in R using the `glm` function as follows:
+# We can fit a glm in `r icon::fa("r-project", size=1)` using the `glm` function as follows:
 
 <br>
 
@@ -383,7 +414,7 @@ fit <-  glm(data=data, #<<
 ```
 ]]
 .column.bg-main3[.content.vmiddle.center[
-# This tells the `glm` function what data we are referring to
+# This tells the `glm` function what data we are referring to.
 ]]
 
 ---
@@ -391,7 +422,7 @@ fit <-  glm(data=data, #<<
 class: split-60 white
 
 .column.bg-main1[.content[
-# We can fit a glm in R using the `glm` function as follows:
+# We can fit a glm in `r icon::fa("r-project", size=1)` using the `glm` function as follows:
 
 <br>
 
@@ -410,7 +441,7 @@ fit <-  glm(data=data,
 class: split-60 white
 
 .column.bg-main1[.content[
-# We can fit a glm in R using the `glm` function as follows:
+# We can fit a glm in `r icon::fa("r-project", size=1)` using the `glm` function as follows:
 
 <br>
 
@@ -457,7 +488,7 @@ fit <-  glm(data=data,
 class: split-60 white
 
 .column.bg-main1[.content[
-# We can fit a glm in R using the `glm` function as follows:
+# We can fit a glm in `r icon::fa("r-project", size=1)` using the `glm` function as follows:
 
 <br>
 
@@ -495,7 +526,7 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 class: split-60 white
 
 .column.bg-main1[.content[
-# We can fit a glm in R using the `glm` function as follows:
+# We can fit a glm in `r icon::fa("r-project", size=1)` using the `glm` function as follows:
 
 <br>
 
@@ -642,7 +673,7 @@ head(data)
 
 
 ```{r, fig.retina=4, echo=FALSE}
-ggplot(data, aes(x=Exam1, y=Exam2, color=factor(Label)))+geom_point(size=4)
+ggplot(data, aes(x=Exam1, y=Exam2, color=factor(Label)))+geom_point(size=4) + theme(text = element_text(size=20))
 ```
 
 
@@ -654,7 +685,7 @@ ggplot(data, aes(x=Exam1, y=Exam2, color=factor(Label)))+geom_point(size=4)
 class: split-60 white
 
 .column.bg-main1[.content[
-# We can fit a glm in R using the `glm` function as follows:
+# We can fit the glm in `r icon::fa("r-project", size=1)` using the `glm` function as follows:
 
 <br>
 
@@ -688,16 +719,42 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 
 ---
 
-# The Lasso
+class: split-two white 
 
----
+.column.bg-main1[.content[
 
-class: middle center bg-main1
+<br>
 
-## We can think of LASSO regression as only having a certain amount of coefficient size to allocate, forcing some to get none!
+# The Decision Boundary
+
+<br>
+
+We can plot the **decision boundary** on our scatterplot for `Exam1` vs `Exam2` by looking at the set of points for which our classifier predicts $$p(y=1|\beta_0 + \beta_1 \text{Exam1} + \beta_2 \text{Exam2}) \geq 0.5$$
 
 
-<iframe width="800" height="450" src="https://www.youtube.com/embed/08drNP-tZbI?rel=0&amp;showinfo=0&amp;start=10" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+Given the `logit` link, this is true when 
+$$\beta_0 + \beta_1 \text{Exam1} + \beta_2 \text{Exam2} \geq 0$$
+
+This is the **decision boundary** and can be rearranged as 
+$$ \text{Exam2} \geq \frac{-\beta_0}{\beta_2} + \frac{-\beta_1}{\beta_2} \text{Exam 1} $$
+
+]]
+
+.column[.content.vmiddle.center[
+
+
+```{r, fig.retina=4, echo=FALSE}
+fit <-  glm(data=data, 
+            Label ~ ., #<<
+            family=binomial(link="logit")) 
+slope <- coef(fit)[2]/(-coef(fit)[3])
+intercept <- coef(fit)[1]/(-coef(fit)[3])
+
+ggplot(data, aes(x=Exam1, y=Exam2, color=factor(Label)))+geom_point(size=4) + theme(text = element_text(size=20)) + geom_abline(slope=slope, intercept=intercept)
+```
+
+
+]]
 
 
 ---
@@ -749,7 +806,7 @@ head(data)
 
 
 ```{r, fig.retina=4, echo=FALSE}
-ggplot(data, aes(x=Test1, y=Test2, color=factor(Label)))+geom_point(size=4)
+ggplot(data, aes(x=Test1, y=Test2, color=factor(Label)))+geom_point(size=4) + theme(text = element_text(size=20))
 ```
 
 
@@ -794,7 +851,7 @@ class: split-two white
 
 <br>
 
-# KNN in R
+# KNN in `r icon::fa("r-project", size=1)`
 
 <br>
 
@@ -818,7 +875,7 @@ class: split-two white pink-code
 
 <br>
 
-# KNN in R
+# KNN in `r icon::fa("r-project", size=1)`
 
 <br>
 
@@ -871,12 +928,12 @@ class: split-two white
 
 <br>
 
-# KNN in R
+# KNN in `r icon::fa("r-project", size=1)`
 
 <br>
 
 ```{r, eval=T}
-train <- data[,1:2]
+X <- data[,1:2]
 cl <- as.factor(data[,3])
 
 library(MASS)
@@ -904,12 +961,12 @@ class: split-two white
 
 <br>
 
-# KNN in R
+# KNN in `r icon::fa("r-project", size=1)`
 
 <br>
 
 ```{r, eval=F}
-train <- data[,1:2]
+X <- data[,1:2]
 cl <- as.factor(data[,3])
 
 library(MASS)
@@ -963,12 +1020,12 @@ class: split-two white
 
 <br>
 
-# KNN in R
+# KNN in `r icon::fa("r-project", size=1)`
 
 <br>
 
 ```{r}
-train <- data[,1:2]
+X <- data[,1:2]
 cl <- as.factor(data[,3])
 
 library(MASS)
@@ -1025,15 +1082,15 @@ ggplot(dataf) +
 ]]
 
 
-
-
 ---
 
-# Decision Trees
+class: middle center bg-main1
 
----
+## What other classifiers exist besides KNN?
 
-# Decision Trees in R using `rpart`
+<img src="images/knn.jpg", width="60%">
+
+
 
 ---
 
@@ -1041,18 +1098,146 @@ class: split-two white
 
 .column[.content[
 
+<br>
+
+# .purple[Decision Trees]
+
+<br>
+
+
+<img src="images/tree.jpg", width="90%">
+
+<br>
+
+
+]]
+
+.column.bg-main1[.content.vmiddle.center[
+
+### A Decision Tree determines the predictive value based on series of questions and conditions.
+
+<br>
+
+###  When making Decision Trees, there are several factors we take into consideration. These include - on what features do we make our decisions on? What is the threshold for classifying each question into a .yellow[**yes**] or .yellow[**no**] answer?
+
+<br>
+
+Image Source: [Egor Dezhic](https://becominghuman.ai)
+
+
+]]
+
+
+---
+
+class: pink-code
+
+# .purple[Decision Trees in `r icon::fa("r-project", size=1)` using `rpart`]
+
+## Consider the `iris` dataset
+
+```{r}
+head(iris)
+```
+
+## How can we construct a decision tree to determine the `Species` of `iris`?
+
+---
+
+class: split-two white
+
+.column.bg-main1[.content[
+
+<br>
+
+# Trees in `r icon::fa("r-project", size=1)`
+
 ```{r, warning=F, fig.retina=4}
 library(rpart)
-library(rpart.plot)
-
-tree <- rpart(Species ~ ., data = iris, method = "class")
-rpart.plot(tree)
+tree <- rpart(Species ~ ., data = iris, method = "class") #<<
 ```
 ]]
 
 .column.bg-main3[.content.vmiddle.center[
-## Using the r part function
+## Using the `rpart` function, we build a classification tree, using the formula `Species~.` to indicate that we wish to use all the variables to predict our class.
 ]]
+
+---
+
+class: split-two white
+
+.column.bg-main1[.content[
+
+<br>
+
+# Trees in `r icon::fa("r-project", size=1)`
+
+```{r, eval=F}
+library(rpart)
+tree <- rpart(Species ~ ., data = iris, method = "class") 
+
+library(rpart.plot) #<<
+rpart.plot(tree) #<<
+```
+
+<br>
+
+### Futher, using the `rpart.plot` function from the `rpart.plot` library, we can visualise the results of our classification tree. 
+
+### Each node shows the predicted class, the predicted probability of each class, and the percentage of observations in each node.
+
+]]
+
+.column[.content.vmiddle.center[
+
+```{r,warning=F, fig.retina=4, out.height='70%',echo=F}
+library(rpart.plot)
+rpart.plot(tree)
+```
+
+
+]]
+
+---
+
+class: split-two white
+
+.column.bg-main1[.content[
+
+<br>
+
+# Trees in `r icon::fa("r-project", size=1)`
+
+```{r, eval=F}
+library(rpart)
+tree <- rpart(Species ~ ., data = iris, method = "class") 
+
+library(rpart.plot) 
+rpart.plot(tree)
+```
+```{r}
+New_Data <-data.frame(Sepal.Length= 5.0, Sepal.Width = 3.9,
+                     Petal.Length = 1.4, Petal.Width = 0.3)
+predict(tree, New_Data) #<<
+
+```
+
+<br>
+
+### Using `predict`, we can predict the class of a new data point, much like in the previous examples. Alternatively - we could have predicted using the tree ourselves!  
+
+]]
+
+.column[.content.vmiddle.center[
+
+```{r,warning=F, fig.retina=4, out.height='70%',echo=F}
+library(rpart.plot)
+rpart.plot(tree)
+```
+
+
+]]
+
 
 
 
@@ -1073,7 +1258,11 @@ rpart.plot(tree)
 
 ---
 
-# Concept: Bagging
+class: middle center
+
+# .purple[Ensemble Learning: Bagging]
+
+<img src="images/bagging.png", width="90%">
 
 
 ---
@@ -1085,21 +1274,47 @@ rpart.plot(tree)
 
 class: split-two white
 
-.column[.content[
+.column.bg-main1[.content[
+
+<br>
+
+# `randomForest` in `r icon::fa("r-project", size=1)`
 
 ```{r, warning=F,message=F}
 library(randomForest)
-set.seed(1)
-iris.rf <- randomForest(Species ~ ., iris)
+iris.rf <- randomForest(Species ~ ., iris) #<<
 iris.rf
 ```
 ]]
 
 .column.bg-main3[.content.vmiddle.center[
-## Using the `randomForest`  function
+## Using the `randomForest`  function, we can train our ensemble learning using the same formula we passed to `rpart`.
 ]]
 
 ---
+
+class: split-two white
+
+.column.bg-main1[.content[
+
+<br>
+
+# `randomForest` in `r icon::fa("r-project", size=1)`
+
+```{r, warning=F,message=F}
+library(randomForest)
+iris.rf <- randomForest(Species ~ ., iris) 
+predict(iris.rf, New_Data) #<<
+```
+]]
+
+.column.bg-main3[.content.vmiddle.center[
+## Again, we can use the same `New_Data` values in the `predict` function as before to reach the same prediction we did with `rpart`.
+
+]]
+
+---
+
 
 class: pink-code
 
@@ -1138,7 +1353,6 @@ class: split-two white
 .column[.content[
 
 ```{r, warning=F,message=F}
-set.seed(1)
 SRBCT.rf <- randomForest(SRBCT$mX, SRBCT$vy) #<<
 SRBCT.rf
 ```
