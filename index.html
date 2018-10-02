@@ -841,11 +841,11 @@ class: split-two white
 
 &lt;br&gt;
 
-# A case for K-Nearest Neighbours
+# When we can't use GLMs
 
 &lt;br&gt;
 
-## Consider the dataset `Microchips`,
+### Consider the dataset `Microchips`, containing test scores `Test1` and `Test2`, and `Label` indicating whether or not the chip passed the test.
 
 
 ```r
@@ -864,7 +864,7 @@ head(data)
 ```
 
 
-### Can we use `glm` to predict the class for a new data point?
+### Why can't we use `glm` to predict the class for a new data point?
 ]]
 
 .column[.content.vmiddle.center[
@@ -1478,7 +1478,7 @@ No. of variables tried at each split: 528
 
 .column.bg-main3[.content.vmiddle.center[
 
-<span>&lt;i class="fas  fa-exclamation-triangle fa-2x faa-flash animated "&gt;&lt;/i&gt;</span> Warning: when using `randomForest` make sure that your response is a **factor** if you want classification. If `SRBCT$vy` had been *numeric*, `randomForest` would have instead tried to *regress* the predictors to predict a continuous response!
+## <span>&lt;i class="fas  fa-exclamation-triangle fa-2x faa-flash animated "&gt;&lt;/i&gt;</span> Warning: when using `randomForest` make sure that your response is a **factor** if you want classification. If `SRBCT$vy` had been *numeric*, `randomForest` would have instead tried to *regress* the predictors to predict a continuous response!
 
 ]]
     </textarea>
