@@ -25,7 +25,7 @@ ui <- fluidPage(
         HTML(
           "Use the sliders to adjust the values of the slope and interept for the linear model to describe the linear relationship between Income and Education for the Income dataset. The squares on the plot represent the square formed by the residual at each point, and the optimal line is given by the line which has the slope and intercept which minimises the sum of these squares."),
         # Text instructions
-        img(src="RSS.png",width="100%"),
+        img(src="rss.png",width="100%"),
         
          sliderInput("intercept",
                      withMathJax(helpText("The value of the intercept, $$\\beta_0$$")),

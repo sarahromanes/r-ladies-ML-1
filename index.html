@@ -18,7 +18,7 @@ class: center, middle, inverse, title-slide
 # Machine Learning 101
 ## Supervised Learning in R
 ### <br><br>Sarah Romanes   <span>&lt;i class="fab  fa-twitter faa-float animated "&gt;&lt;/i&gt;&amp;nbsp;@sarahromanes</span>
-### <br>2018/10/10<br><br><span>&lt;i class="fas  fa-link faa-vertical animated " style=" color:white;"&gt;&lt;/i&gt;&amp;nbsp;bit.ly/rladies-sydney-ML-1</span>
+### <br>10-Oct-2018<br><br><span>&lt;i class="fas  fa-link faa-vertical animated " style=" color:white;"&gt;&lt;/i&gt;&amp;nbsp;bit.ly/rladies-sydney-ML-1</span>
 
 ---
 
@@ -34,7 +34,7 @@ class: bg-main3 split-30 hide-slide-number
 ]
 .column.slide-in-right[.content.vmiddle[
 .sliderbox.shade_main.pad1[
-.font5[Welcome]
+.font5[Welcome!]
 ]
 ]]
 
@@ -48,7 +48,7 @@ class: split-two white
 
 &lt;br&gt;
 
-### This two part R-Ladies workshop is designed to give you a small taster into the large field that is known as .purple[**Machine Learning**]! Today, we will cover supervised learning techniques (explained later), and next week we will cover model performance assessment.
+### This two part R-Ladies workshop is designed to give you a small taster into the large field that is known as .orange[**Machine Learning**]! Today, we will cover supervised learning techniques (explained later), and next week we will cover model performance assessment.
 
 &lt;br&gt;
 
@@ -88,7 +88,7 @@ class: middle center bg-main1
 
 &lt;br&gt;
 
-### Mathematically, Machine Learning problems are simply *optimisation* problems, in which we will use <i class="fab  fa-r-project "></i> to help us solve!
+### Mathematically, Machine Learning problems are simply *optimisation* problems, in which we will use .purple[<i class="fab  fa-r-project "></i>] to help us solve!
 
 ---
 
@@ -104,7 +104,40 @@ class: middle center bg-main1
 
 ---
 
-# .purple[Supervised vs Unsupervised Learning]
+class: split-two white 
+
+.column.bg-main1[.content[
+
+&lt;br&gt;
+
+# Types of Learning
+
+&lt;br&gt;
+
+## .orange[Supervised Learning]
+
+### - We have knowledge of class labels or values.
+
+### - Goal: train a model using known class labels to predict class or value label for a new data point.
+
+&lt;br&gt;
+
+## .orange[Unsupervised Learning]
+
+### - No knowledge of output class or value –data is unlabelled.
+
+### - Goal: determine data patterns/groupings.
+
+
+]]
+
+.column[.content.vmiddle.center[
+
+&lt;img src="images/learning.png", width="80%"&gt;
+
+##### .purple[Credit to Towards Data Science]
+
+]]
 
 
 ---
@@ -130,8 +163,6 @@ class: split-two white
 
 # A simple prediction problem
 
-&lt;br&gt;
-
 ### Consider the simulated dataset `Income`, which looks at the relationship between `Education` (years) and `Income` (thousands).
 
 
@@ -150,7 +181,7 @@ head(data)
 ## 6  12.08696 26.39895
 ```
 
-### What shape is the relationship? Can we build a function to predict the value of a new data point?
+#### What shape is the relationship? Can we build a function to predict the value of a new data point?
 
 ]]
 
@@ -173,8 +204,26 @@ class: middle center bg-main1
 
 ---
 
-# Shiny app
+class: pink-code
 
+# .purple[What line is optimal?]
+
+&lt;br&gt;
+
+### We can use a .purple[**linear function**] to describe our data and .purple[**predict**] a new data point. The question is, what is the .purple[*optimal line*]?
+
+&lt;br&gt;
+
+### One way to do this is find the slope and intercept that .purple[*minimise*] the sum of the squared residuals between the line and our data points:
+
+&lt;center&gt;
+&lt;img src="images/rss.png", width="25%"&gt;
+&lt;/center&gt;
+
+### We can visualise this optimisation process using a .purple[**Shiny App**] [here](http://43.240.99.178:3838/sample-apps/LinearRegression/).
+
+
+### .purple[<i class="fab  fa-r-project "></i>] performs this optimisation process for us when we call the `lm` function.
 ---
 
 class: split-60 white
@@ -259,7 +308,7 @@ F-statistic: 377.6 on 1 and 28 DF,  p-value: &lt; 2.2e-16
 ]]
 .column.bg-main3[.content.vmiddle.center[
 
-## We can use `summary` function to examine regression coefficients, and information about the residuals of our model.
+## We can use the `summary` function to examine regression coefficients, and information about the residuals of our model.
 ]]
 
 ---
@@ -304,7 +353,7 @@ F-statistic: 377.6 on 1 and 28 DF,  p-value: &lt; 2.2e-16
 ]]
 .column.bg-main3[.content.vmiddle.center[
 
-## We can use `summary` function to examine regression coefficients, and information about the residuals of our model.
+## We can use the `summary` function to examine regression coefficients, and information about the residuals of our model.
 ]]
 
 ---
@@ -446,7 +495,8 @@ fit &lt;-  glm(data=data,
 ```
 ]]
 .column.bg-main3[.content.vmiddle.center[
-## This tells the `glm` function what variables we would like to regress. Just like the `lm` function, R expects the relationship in the form of `response~predictors`. 
+## This tells the `glm` function what variables we would like to regress. 
+### Just like the `lm` function, R expects the relationship in the form of `response~predictors`. 
 ]]
 
 ---
@@ -776,7 +826,7 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 ```
 ]]
 .column.bg-main3[.content.vmiddle.center[
-### The formula `Label ~ . ` tells the `glm` funcion to regress against all (two) predictors, `Exam1` and `Exam2`.
+### The formula `Label ~ . ` tells the `glm` function to regress against all (two) predictors, `Exam1` and `Exam2`.
 ]]
 
 ---
@@ -791,13 +841,13 @@ class: split-two white
 
 &lt;br&gt;
 
-We can plot the **decision boundary** on our scatterplot for `Exam1` vs `Exam2` by looking at the set of points for which our classifier predicts `$$p(y=1|\beta_0 + \beta_1 \text{Exam1} + \beta_2 \text{Exam2}) \geq 0.5$$`
+### We can plot the **decision boundary** on our scatterplot for `Exam1` vs `Exam2` by looking at the set of points for which our classifier predicts `$$p(y=1|\beta_0 + \beta_1 \text{Exam1} + \beta_2 \text{Exam2}) \geq 0.5$$`
 
 
-Given the `logit` link, this is true when 
+### Given the `logit` link, this is true when 
 `$$\beta_0 + \beta_1 \text{Exam1} + \beta_2 \text{Exam2} \geq 0$$`
 
-This is the **decision boundary** and can be rearranged as 
+### This is the **decision boundary** and can be rearranged as 
 $$ \text{Exam2} \geq \frac{-\beta_0}{\beta_2} + \frac{-\beta_1}{\beta_2} \text{Exam 1} $$
 
 ]]
@@ -877,24 +927,37 @@ head(data)
 
 ---
 
-# Different data types require different machine learning methods
+# .purple[Different data types require different machine learning methods]
 
-While we can indeed use Logistic regression to **classify** data points, this simply isn't feasible when
+&lt;br&gt;
 
-We have high class seperation in our data
-We have a non-linear combination of predictors influcing our response
+## While we can indeed use Logistic regression to .purple[**classify**] data points, this simply isn't feasible when:
 
+### - We have high class seperation in our data
+### - We have a non-linear combination of predictors influcing our response (as in this case)
 
-So, what other options do we have?
+&lt;br&gt;
+
+## .purple[**So, what other options do we have?**]
 
 ---
 class: split-two white 
 
 .column.bg-main1[.content[
 
+&lt;br&gt;
+
 # The K-Nearest Neighbours Algorithm
 
-Credit to Natasha Latysheva for image
+&lt;br&gt;
+
+## .orange[**K Nearest Neighbours (KNN)**] is a non-parametric algorithm (doesn't assume the data follows any particular shape).
+
+&lt;br&gt;
+
+## In KNN, we vote on the class of a new data point by looking at the majority class of the .orange[**K**] nearest neighbours.
+
+
 
 ]]
 
@@ -902,6 +965,7 @@ Credit to Natasha Latysheva for image
 
 &lt;img src="images/knn2-Natasha-Latysheva.jpg", width="80%"&gt;
 
+##### .purple[Credit to Natasha Latysheva]
 
 ]]
 
@@ -926,14 +990,14 @@ cl &lt;- as.factor(data[,3])
 ]]
 
 .column.bg-main3[.content.vmiddle.center[
-## First, we split our data into **predictors** (`X`), and response (`cl` - for *class*),
+## First, we split our data into **predictors** (`X`), and response (`cl` for *class*),
 
 ]]
 
 
 ---
 
-class: split-two white pink-code
+class: split-two white
 
 .column.bg-main1[.content[
 
@@ -942,6 +1006,8 @@ class: split-two white pink-code
 # KNN in <i class="fab  fa-r-project "></i>
 
 &lt;br&gt;
+
+Next, we need to give the function new data points, as the `knn` function fits and predicts at the same time. We will use the `MASS` package to generate a grid of new points to predict the class of.
 
 
 ```r
@@ -954,11 +1020,12 @@ library(MASS)
 *                    y=seq(min(X[,2]-0.5), max(X[,2]+0.5),
 *                          by=0.1))
 ```
+
+
 ]]
 
 .column[.content.vmiddle.center[
 
-.black[Next, we need to give the function new data points, as the `knn` function fits and predicts at the same time. We will use the `MASS` package to generate a grid of new points to predict the class of.]
 
 &lt;img src="index_files/figure-html/unnamed-chunk-37-1.png" width="504" /&gt;
 
@@ -989,13 +1056,13 @@ new.X &lt;- expand.grid(x=seq(min(X[,1]-0.5), max(X[,1]+0.5),
                            by=0.1))
  
 library(class)
-*classif &lt;- knn(X, new.X, cl, k = 4, prob=TRUE)
+*classif &lt;- knn(X, new.X, cl, k = 3, prob=TRUE)
 ```
 ]]
 
 .column.bg-main3[.content.vmiddle.center[
 
-## Now we call the `knn` function, putting in our datapoints, our new data, and the classes of the original data points, as well as how many neighbours we want to consider. In this example, we consider `k=4`.
+## Now we call the `knn` function, putting in our datapoints, our new data, and the classes of the original data points, as well as how many neighbours we want to consider. In this example, we consider `k=3`.
 ]]
 
 
@@ -1023,7 +1090,7 @@ new.X &lt;- expand.grid(x=seq(min(X[,1]-0.5), max(X[,1]+0.5),
                            by=0.1))
  
 library(class)
-classif &lt;- knn(X, new.X, cl, k = 4, prob=TRUE)
+classif &lt;- knn(X, new.X, cl, k = 3, prob=TRUE)
 ```
 
 
@@ -1069,7 +1136,7 @@ new.X &lt;- expand.grid(x=seq(min(X[,1]-0.5), max(X[,1]+0.5),
                            by=0.1))
  
 library(class)
-*classif &lt;- knn(X, new.X, cl, k = 10, prob=TRUE)
+*classif &lt;- knn(X, new.X, cl, k = 9, prob=TRUE)
 ```
 
 
@@ -1077,7 +1144,7 @@ library(class)
 
 &lt;center&gt;
 
-We can also see how our decisions change based on the number of neighbours we consider! Here, we consider `k=10`.
+We can also see how our decisions change based on the number of neighbours we consider! Here, we consider `k=9`.
 
 &lt;/center&gt;
 
@@ -1125,7 +1192,7 @@ class: split-two white
 
 &lt;br&gt;
 
-###  When making Decision Trees, there are several factors we take into consideration. These include - on what features do we make our decisions on? What is the threshold for classifying each question into a .yellow[**yes**] or .yellow[**no**] answer?
+###  When making Decision Trees, there are several factors we take into consideration. These include - on what features do we make our decisions on? What is the threshold for classifying each question into a .orange[**yes**] or .orange[**no**] answer?
 
 &lt;br&gt;
 
@@ -1315,12 +1382,12 @@ iris.rf
 ##                      Number of trees: 500
 ## No. of variables tried at each split: 2
 ## 
-##         OOB estimate of  error rate: 4%
+##         OOB estimate of  error rate: 4.67%
 ## Confusion matrix:
 ##            setosa versicolor virginica class.error
 ## setosa         50          0         0        0.00
 ## versicolor      0         47         3        0.06
-## virginica       0          3        47        0.06
+## virginica       0          4        46        0.08
 ```
 ]]
 
@@ -1411,7 +1478,10 @@ rpart.plot(tree.SRBCT)
 ]]
 
 .column.bg-main3[.content.vmiddle.center[
-## Using the r part function
+
+## Using the `rpart` function along with `rpart.plot`, we can see the tree used to classify the `SRBCT` data. Note how simple it is!
+
+###  PS - note here the alternative formulation of the input to the `rpart` function. If we input `X` and `y` directly, we don't need to reference the data set.
 ]]
 
 ---
@@ -1445,7 +1515,10 @@ SRBCT.rf
 ]]
 
 .column.bg-main3[.content.vmiddle.center[
-## Using the `randomForest`  function
+## Using the `randomForest`  function we can also classify on the same data. 
+
+###  PS, here I use yet another formulation of input into the `randomForest` function. Note here how `X` comes before `y`!
+
 ]]
 
 
