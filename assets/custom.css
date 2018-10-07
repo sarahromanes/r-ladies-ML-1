@@ -29,3 +29,6 @@
 .pink-code * > .remark-inline-code  {
   color: #E61771!important;
 }
+
+.content > h4,h5,h6
+{ padding-left: 2%;padding-right: 2%;}
