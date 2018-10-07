@@ -1,7 +1,7 @@
 ---
 title: "Machine Learning 101"
 subtitle: "Supervised Learning in R"
-author: "<br><br>Sarah Romanes&nbsp;&nbsp;&nbsp;`r anicon::faa('twitter', animate='float', rtext='&nbsp;@sarahromanes')`"
+author: "<br><br>Sarah Romanes&nbsp;&nbsp;&nbsp;`r anicon::faa('twitter', animate='float', rtext='&nbsp;@sarah_romanes')`"
 date: "<br>10-Oct-2018<br><br>`r anicon::faa('link', animate='vertical', rtext='&nbsp;bit.ly/rladies-sydney-ML-1', color='white')`"
 output:
   xaringan::moon_reader:
