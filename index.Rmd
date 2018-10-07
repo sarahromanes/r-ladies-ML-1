@@ -221,6 +221,8 @@ class: pink-code
 
 
 ### .purple[`r icon::fa("r-project", size=1)`] performs this optimisation process for us when we call the `lm` function.
+
+###### (PS) see an alternative derivation [here](https://sarahromanes.github.io/post/gganimate/)!
 ---
 
 class: split-60 white
@@ -1469,18 +1471,80 @@ No. of variables tried at each split: 528
 
 ---
 
-There are many more didferent types of ML algorithms out there...
+class: split-two white
+
+.column.bg-main1[.content[
+
+
+<br>
+# There are many more machine learning algorithms that I haven't touched on today! Some include...
+
+<br>
+
+### - Support Vector Machines (`e1071`)
+### - Boosted Tree Models (`xgboost`)
+### - Discriminant Analysis methods (`MASS`, `sparsediscrim`, `multiDA`, `pamr`)
+### - Regularised GLMs (`glmnet`)
+### - Neural Networks (`neuralnet`,`keras`)
+
+##### and more...
+
+
+
+]]
+
+.column[.content.vmiddle.center[
+
+<img src="images/zoolander.jpeg", width="80%">
+
+###### [Jacob Shiff](https://medium.com/@jacobshiff/machine-learning-a-brief-primer-ebd1ea265f71)
+
+]]
+
+
 ---
 
-Thanks to
+layout: false
+class: bg-main3 split-30 hide-slide-number
 
-- Emi for slides
-- Mark for hosting my shiny app
-- Websites for Income/Exam/Microship/Spiders data
-- R ladies organisers 
+.column[
+
+]
+.column.slide-in-right[.content.vmiddle[
+.sliderbox.shade_main.pad1[
+.font5[Thank you!]
+]
+]]
 
 ---
-Stay tuned for part 2 - model performance!
-(smbc comic)
+class: bg-main1
+
+# Big thanks go to:
+
+<br>
+
+## - Emi Tanaka for developing the Kunoichi themed slides, and also Yuhui Xie for developing `xaringan`!
+## - Mark Greenaway for helping hosting my shiny app.
+## - The R-Ladies Sydney organisers - you guys rock!
 
 ---
+class: split-two white
+
+.column.bg-main1[.content.vmiddle.center[
+
+
+# Stay tuned for .orange[Part 2] next Wednesday - 'Assessing Model Performance'!
+
+# `r anicon::faa('cogs', animate='float', size=5)`
+
+
+]]
+
+.column[.content.vmiddle.center[
+
+<img src="images/machinewar.png", width="70%">
+
+###### [SMBC](https://www.smbc-comics.com/comic/rise-of-the-machines)
+
+]]
+
