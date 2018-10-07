@@ -82,13 +82,13 @@ class: middle center bg-main1
 
 <br>
 
-### Machine learning is concerned with finding functions that best **predict** outputs (responses), given data inputs (predictors).
+### Machine learning is concerned with finding functions $Y=f(X)+\epsilon$ that best **predict** outputs (responses), given data inputs (predictors).
 
 <br>
 
 <center>
 
-  <img src="images/ml-process.png", width="60%">
+  <img src="images/ml-process.png", width="50%">
 
 </center>
 
@@ -126,7 +126,6 @@ class: split-two white
 
 ### - Goal: train a model using known class labels to predict class or value label for a new data point.
 
-<br>
 
 ## .orange[Unsupervised Learning]
 
@@ -176,7 +175,7 @@ data <- read.csv("data/Income.csv")
 head(data)
 ```
 
-#### What shape is the relationship? Can we build a function to predict the value of a new data point?
+### What shape is the relationship? Can we build a function to predict the value of a new data point?
 
 ]]
 
@@ -207,9 +206,9 @@ class: pink-code
 
 <br>
 
-### We can use a .purple[**linear function**] to describe our data and .purple[**predict**] a new data point. The question is, what is the .purple[*optimal line*]?
+### We can use a .purple[**linear function**] to describe our data and .purple[**predict**] a new data point. The question is, what is the .purple[*optimal line*] ?
 
-<br>
+--
 
 ### One way to do this is find the slope and intercept that .purple[*minimise*] the sum of the squared residuals between the line and our data points:
 
@@ -217,7 +216,10 @@ class: pink-code
 <img src="images/rss.png", width="25%">
 </center>
 
+
 ### We can visualise this optimisation process using a .purple[**Shiny App**] [here](http://43.240.99.178:3838/sample-apps/LinearRegression/).
+
+--
 
 
 ### .purple[`r icon::fa("r-project", size=1)`] performs this optimisation process for us when we call the `lm` function.
@@ -380,6 +382,8 @@ class: split-two white
 
 .column.bg-main1[.content[
 
+<br>
+
 # Modelling Binary Outcomes
 
 <br>
@@ -388,7 +392,7 @@ class: split-two white
 
 ```{r}
 data <- read.csv("data/Spiders.csv")
-head(data)
+head(data,3)
 ```
 
 ### Can we use `lm` to predict the class for a new data point?
@@ -414,7 +418,9 @@ class: split-two white
 
 .column.bg-main1[.content[
 
-## To model **binary data**, we need to **link** our **predictors** to our response using a *link function*.
+<br>
+
+## To model **binary data**, we need to .orange[link] our **predictors** to our response using a *link function*.
 
 <br>
 
@@ -642,6 +648,8 @@ class: split-60 white
 
 .column[.content[
 
+<br>
+
 ```{r}
 fit <-  glm(data=data.new, 
             Spiders~GrainSize, 
@@ -660,6 +668,8 @@ fit <-  glm(data=data.new,
 class: split-60 white
 
 .column[.content[
+
+<br>
 
 ```{r, eval=T}
 fit <-  glm(data=data.new, 
@@ -716,7 +726,7 @@ class: split-two white
 
 ```{r, fig.retina=4}
 data<- read.csv("data/Exam.csv", header=T)
-head(data)
+head(data,4)
 ```
 
 ]]
@@ -784,10 +794,10 @@ class: split-two white
 ### We can plot the **decision boundary** on our scatterplot for `Exam1` vs `Exam2` by looking at the set of points for which our classifier predicts $$p(y=1|\beta_0 + \beta_1 \text{Exam1} + \beta_2 \text{Exam2}) \geq 0.5$$
 
 
-### Given the `logit` link, this is true when 
+#### Given the `logit` link, this is true when 
 $$\beta_0 + \beta_1 \text{Exam1} + \beta_2 \text{Exam2} \geq 0$$
 
-### This is the **decision boundary** and can be rearranged as 
+#### This is the **decision boundary** and can be rearranged as 
 $$ \text{Exam2} \geq \frac{-\beta_0}{\beta_2} + \frac{-\beta_1}{\beta_2} \text{Exam 1} $$
 
 ]]
@@ -847,7 +857,7 @@ class: split-two white
 
 ```{r, fig.retina=4}
 data <- read.csv("data/Microchips.csv")
-head(data)
+head(data,4)
 ```
 
 
@@ -945,7 +955,7 @@ class: split-two white
 
 <br>
 
-Next, we need to give the function new data points, as the `knn` function fits and predicts at the same time. We will use the `MASS` package to generate a grid of new points to predict the class of.
+### Next, we need to give the function new data points, as the `knn` function fits and predicts at the same time. We will use the `MASS` package to generate a grid of new points to predict the class of.
 
 ```{r, warning=FALSE, message=FALSE}
 X <- data[,1:2]
@@ -1203,6 +1213,8 @@ class: pink-code
 
 # .purple[Decision Trees in `r icon::fa("r-project", size=1)` using `rpart`]
 
+<br>
+
 ## Consider the `iris` dataset
 
 ```{r}
@@ -1293,7 +1305,7 @@ predict(tree, New_Data) #<<
 
 <br>
 
-### Using `predict`, we can predict the class of a new data point, much like in the previous examples. Alternatively - we could have predicted using the tree ourselves!  
+#### Using `predict`, we can predict the class of a new data point, much like in the previous examples. Alternatively - we could have predicted using the tree ourselves!  
 
 ]]
 
@@ -1336,7 +1348,37 @@ class: middle center
 
 ---
 
-# Random Forest
+class: split-two white
+
+.column.bg-main1[.content[
+
+
+<br>
+# From bagging to Random Forest
+
+<br>
+
+### With Random Forest we randomly select a subset of predictors to use for each tree.
+
+<br>
+
+### The reason? Tree correlation. 
+
+<br>
+
+### If one or a few features are very strong predictors for the response variable, then these features will be selected in many of the trees, causing them to become correlated. .orange[This can reduce the accuracy of the ensemble.]
+
+
+]]
+
+.column[.content.vmiddle.center[
+
+<img src="images/randomforest.png", width="85%">
+
+###### .black[Source:] [GSS](http://www.globalsoftwaresupport.com/random-forest-classifier-bagging-machine-learning/)
+
+]]
+
 
 
 ---
@@ -1393,7 +1435,6 @@ class: pink-code
 
 ```{r}
 library(multiDA)
-class(SRBCT$vy)
 table(SRBCT$vy)
 dim(SRBCT$mX)
 ```
@@ -1424,6 +1465,8 @@ class: split-two white
 
 .column[.content[
 
+<br>
+
 ```{r, warning=F,message=F}
 SRBCT.rf <- randomForest(SRBCT$mX, SRBCT$vy) #<<
 SRBCT.rf
@@ -1444,6 +1487,8 @@ SRBCT.rf
 class: split-two white
 
 .column[.content[
+
+<br>
 
 ```{r, warning=F,message=F, eval=F}
 set.seed(1)
@@ -1487,7 +1532,6 @@ class: split-two white
 ### - Regularised GLMs (`glmnet`)
 ### - Neural Networks (`neuralnet`,`keras`)
 
-##### and more...
 
 
 
@@ -1527,6 +1571,11 @@ class: bg-main1
 ## - Mark Greenaway for helping hosting my shiny app.
 ## - The R-Ladies Sydney organisers - you guys rock!
 
+## `r anicon::faa('thumbs-up', animate='float', size=5)`
+
+
+
+
 ---
 class: split-two white
 
@@ -1535,7 +1584,7 @@ class: split-two white
 
 # Stay tuned for .orange[Part 2] next Wednesday - 'Assessing Model Performance'!
 
-# `r anicon::faa('cogs', animate='float', size=5)`
+# `r anicon::faa('cogs', animate='vertical', size=5)`
 
 
 ]]
