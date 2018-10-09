@@ -16,6 +16,7 @@ Libraries you will need to compile these slides include
 * `latex2exp`
 * `dplyr`
 * `multiDA` (which can be found [here](https://github.com/sarahromanes/multiDA))
+* `anicon` (which can be found [here](https://github.com/emitanaka/anicon))
 
 If you are interested, you might like to see files for *part two* of the ML workshop, which is about **assessing model performance**. These are located here.
 
